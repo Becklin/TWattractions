@@ -1,20 +1,29 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import moment from "moment";
 import Link from "next/link";
+import Image from "next/image";
+import { FaImage } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import Layout from "@/components/Layout";
+import Modal from "@/components/Modal";
+import ImageUpload from "@/components/ImageUpload";
 import { API_URL } from "@/config/index";
 import styles from "@/styles/Form.module.scss";
 
-export default function AddAttractions() {
+export default function EditAttractions({ attraction }) {
   const [values, setValues] = useState({
-    name: "",
-    location: "",
-    address: "",
-    date: "",
-    description: "",
+    name: attraction.name,
+    location: attraction.location,
+    address: attraction.address,
+    date: attraction.date,
+    description: attraction.description,
   });
+  const [imagePreview, setImagePreview] = useState(
+    attraction.image ? attraction.image.formats.thumbnail.url : null
+  );
   const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     // router.push();
@@ -22,8 +31,8 @@ export default function AddAttractions() {
     console.log(values);
     const hasEmptyField = Object.values(values).some((val) => val === "");
     if (hasEmptyField) toast.error("please fill in all fields");
-    const res = await fetch(`${API_URL}/attractions/`, {
-      method: "POST",
+    const res = await fetch(`${API_URL}/attractions/${attraction.id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -42,10 +51,17 @@ export default function AddAttractions() {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
+  const uploadImage = async (e) => {
+    console.log("upload");
+    const res = await fetch(`${API_URL}/attractions/${attraction.id}`);
+    const data = await res.json();
+    setImagePreview(data.image.formats.thumbnail.url);
+    setShowModal(false);
+  };
   return (
-    <Layout title="Add New Attraction">
+    <Layout title="Update New Attraction">
       <Link href="/attractions">Back</Link>
-      <h1>Add Attraction!</h1>
+      <h1>Edit Attraction!</h1>
       <ToastContainer />
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.grid}>
@@ -85,7 +101,7 @@ export default function AddAttractions() {
               type="date"
               id="date"
               name="date"
-              value={values.date}
+              value={moment(values.date).format("YYYY-MM-DD")}
               onChange={handleInputChange}
             />
           </div>
@@ -99,9 +115,32 @@ export default function AddAttractions() {
               onChange={handleInputChange}
             />
           </div>
-          <input type="submit" className="btn" value="Add Attraction" />
+          <input type="submit" className="btn" value="Edit Attraction" />
         </div>
       </form>
+      <h2>Attraction Image</h2>
+      {imagePreview ? (
+        <Image src={imagePreview} height={100} width={170} />
+      ) : (
+        <div>No Image Uploaded</div>
+      )}
+
+      <div>
+        <button className="btn-secondary" onClick={() => setShowModal(true)}>
+          <FaImage /> Set Image
+        </button>
+      </div>
+      <Modal show={showModal} onClose={() => setShowModal(false)}>
+        <ImageUpload atrId={attraction.id} imageUploaded={uploadImage} />
+      </Modal>
     </Layout>
   );
+}
+
+export async function getServerSideProps({ params: { id } }) {
+  const res = await fetch(`${API_URL}/attractions/${id}`);
+  const attraction = await res.json();
+  return {
+    props: { attraction },
+  };
 }
