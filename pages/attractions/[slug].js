@@ -19,7 +19,6 @@ export default function AttractionPage({ attraction }) {
       if (!res.ok) {
         toast.error(data.message);
       } else {
-        console.log("倒也");
         router.push("/attractions");
       }
     }
@@ -28,16 +27,6 @@ export default function AttractionPage({ attraction }) {
   return (
     <Layout>
       <div className={styles.attraction}>
-        <div className={styles.controls}>
-          <Link href={`/attractions/edit/${attraction.id}`}>
-            <a>
-              <FaPencilAlt /> Edit Attraction
-            </a>
-          </Link>
-          <a href="#" className={styles.delete} onClick={deleteAttraction}>
-            <FaTimes /> Delete Attraction
-          </a>
-        </div>
         {attraction.image && (
           <div className={styles.image}>
             <Image
@@ -47,9 +36,19 @@ export default function AttractionPage({ attraction }) {
             />
           </div>
         )}
-        <span>{new Date(attraction.date).toLocaleDateString("en-ca")}</span>
+        <span className={styles.controls}>
+          <Link href={`/attractions/edit/${attraction.id}`}>
+            <a className="btn-third">
+              <FaPencilAlt /> Edit Attraction
+            </a>
+          </Link>
+          <a href="#" className="btn-third" onClick={deleteAttraction}>
+            <FaTimes /> Delete Attraction
+          </a>
+        </span>
         <h1>{attraction.name}</h1>
-        <span>
+        <span className={styles.subinfo}>
+          {new Date(attraction.date).toLocaleDateString("en-ca")}{" "}
           {attraction.address} at {attraction.location}
         </span>
         <p>{attraction.description}</p>

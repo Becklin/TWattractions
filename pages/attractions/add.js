@@ -44,7 +44,6 @@ export default function AddAttractions() {
   };
   return (
     <Layout title="Add New Attraction">
-      <Link href="/attractions">Back</Link>
       <h1>Add Attraction!</h1>
       <ToastContainer />
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -102,6 +101,7 @@ export default function AddAttractions() {
           <input type="submit" className="btn" value="Add Attraction" />
         </div>
       </form>
+      <Link href="/attractions">Back</Link>
     </Layout>
   );
 }
