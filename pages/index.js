@@ -2,11 +2,10 @@ import { useRouter } from "next/router";
 import Layout from "@/components/Layout";
 import AttractionItem from "@/components/AttractionItem";
 import Showcase from "@/components/Showcase";
-
+import styles from "@/styles/Layout.module.scss";
 import { API_URL } from "@/config/index";
 import Link from "next/link";
 export default function HomePage({ attractions }) {
-  console.log("首頁", attractions);
   const router = useRouter();
   return (
     <Layout>
@@ -17,9 +16,11 @@ export default function HomePage({ attractions }) {
         return <AttractionItem key={attraction.id} attraction={attraction} />;
       })}
       {attractions.length > 0 && (
-        <Link href="attractions">
-          <a className="btn-secondary">View All Attractions</a>
-        </Link>
+        <div className={styles.controls}>
+          <Link href="attractions">
+            <a className="btn-secondary">View All Attractions</a>
+          </Link>
+        </div>
       )}
     </Layout>
   );

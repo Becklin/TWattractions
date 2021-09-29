@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Layout from "@/components/Layout";
 import { API_URL } from "@/config/index";
 import styles from "@/styles/Form.module.scss";
@@ -17,8 +18,6 @@ export default function AddAttractions() {
   const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // router.push();
-    // validation
     console.log(values);
     const hasEmptyField = Object.values(values).some((val) => val === "");
     if (hasEmptyField) toast.error("please fill in all fields");

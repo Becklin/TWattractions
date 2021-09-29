@@ -1,4 +1,6 @@
 import Layout from "@/components/Layout";
+import styles from "@/styles/Layout.module.scss";
+
 import AttractionItem from "@/components/AttractionItem";
 import Pagination from "@/components/Pagination";
 import { API_URL, PER_PAGE } from "@/config/index";
@@ -11,7 +13,9 @@ export default function AttractionsPage({ attractions, page, total }) {
       {attractions.map((attraction) => {
         return <AttractionItem key={attraction.id} attraction={attraction} />;
       })}
-      <Pagination page={page} total={total} />
+      <div className={styles.controls}>
+        <Pagination page={page} total={total} />
+      </div>
     </Layout>
   );
 }

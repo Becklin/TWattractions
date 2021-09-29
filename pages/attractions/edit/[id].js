@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaImage } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Layout from "@/components/Layout";
 import Modal from "@/components/Modal";
 import ImageUpload from "@/components/ImageUpload";
@@ -22,6 +23,7 @@ export default function EditAttractions({ attraction }) {
   const [imagePreview, setImagePreview] = useState(
     attraction.image ? attraction.image.formats.thumbnail.url : null
   );
+
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const handleSubmit = async (e) => {
@@ -55,9 +57,11 @@ export default function EditAttractions({ attraction }) {
     console.log("upload");
     const res = await fetch(`${API_URL}/attractions/${attraction.id}`);
     const data = await res.json();
+    console.log("資料", data);
     setImagePreview(data.image.formats.thumbnail.url);
     setShowModal(false);
   };
+  console.log(imagePreview);
   return (
     <Layout title="Update New Attraction">
       <Link className={styles.back} href="/attractions">
@@ -117,7 +121,7 @@ export default function EditAttractions({ attraction }) {
               onChange={handleInputChange}
             />
           </div>
-          <input type="submit" className="btn" value="Edit Attraction" />
+          <input type="submit" className="btn" value="Update Attraction" />
         </div>
       </form>
       <h2>Attraction Image</h2>
