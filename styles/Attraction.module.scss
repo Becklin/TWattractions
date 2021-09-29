@@ -7,7 +7,9 @@
   padding: 13px;
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
 }
-
+.back {
+  align-self: flex-end;
+}
 .img {
   flex: 1;
   margin: 10px;

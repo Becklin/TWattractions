@@ -1,6 +1,10 @@
 .footer {
-  margin: 100px 0 40px;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  margin: 40px 0 0px;
   text-align: center;
+  background-color: #333;
 }
 
 .footer p {

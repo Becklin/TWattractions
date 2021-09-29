@@ -19,9 +19,9 @@ export default function AttractionItem({ attraction }) {
       <div className={styles.info}>
         <span>{new Date(attraction.date).toLocaleDateString("en-ca")}</span>
         <h3>{attraction.name}</h3>
-        <span>{attraction.description}</span>
+        <p>{attraction.description}</p>
       </div>
-      <div className={styles.link}>
+      <div className={styles.detail}>
         <Link href={`/attractions/${attraction.slug}`}>
           <a className="btn">Details</a>
         </Link>

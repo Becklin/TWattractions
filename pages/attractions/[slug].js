@@ -54,7 +54,7 @@ export default function AttractionPage({ attraction }) {
         </span>
         <p>{attraction.description}</p>
         <Link href="/attractions">
-          <a className="">{"<"} Back</a>
+          <a className={styles.back}>{"<"} Back</a>
         </Link>
       </div>
     </Layout>

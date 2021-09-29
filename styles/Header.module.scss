@@ -2,18 +2,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff;
+  background: #333;
   color: #333;
   height: 60px;
   padding: 0 30px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
   a {
-    color: #333;
+    color: #fff;
     margin-right: 20px;
+    border: 1px solid #fff;
+    padding: 0 1rem;
   }
 
   a:hover {
-    color: #000;
+    color: #fff;
   }
   ul {
     display: flex;

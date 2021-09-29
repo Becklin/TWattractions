@@ -60,7 +60,9 @@ export default function EditAttractions({ attraction }) {
   };
   return (
     <Layout title="Update New Attraction">
-      <Link href="/attractions">Back</Link>
+      <Link className={styles.back} href="/attractions">
+        Back
+      </Link>
       <h1>Edit Attraction!</h1>
       <ToastContainer />
       <form onSubmit={handleSubmit} className={styles.form}>
