@@ -3,7 +3,6 @@ import Image from "next/image";
 import { FaPencilAlt, FaTimes } from "react-icons/fa";
 import { API_URL } from "@/config/index";
 import Layout from "@/components/Layout";
-// import AttractionMap from "@/components/AttractionMap";
 import styles from "@/styles/Attraction.module.scss";
 import Link from "next/link";
 import { toast } from "react-toastify";
@@ -23,7 +22,7 @@ export default function AttractionPage({ attraction }) {
       }
     }
   };
-  console.log("LOGLOG ", attraction);
+
   return (
     <Layout>
       <div className={styles.attraction}>
@@ -60,37 +59,15 @@ export default function AttractionPage({ attraction }) {
   );
 }
 
-// export async function getStaticPaths() {
-//   const res = await fetch(`${API_URL}/attractions`);
-//   const attractions = await res.json();
-//   const paths = attractions.map((atr) => ({
-//     params: { slug: atr.slug },
-//   }));
-//   return {
-//     paths: paths,
-//     fallback: true,
-//   };
-// }
-
-// export async function getStaticProps({ params: { slug } }) {
-//   console.log("史拉殼", slug);
-//   const res = await fetch(`${API_URL}/attractions?slug=${slug}`);
-//   const attractions = await res.json();
-//   console.log("下一個attractions", attractions);
-
-//   return {
-//     props: {
-//       attraction: attractions[0],
-//     },
-//     revalidate: 1,
-//   };
-// }
+//  If a page uses Server-side Rendering, the page HTML is generated on each request.
+//  In this case,
+//  Maybe your page shows frequently updated data,
+//  and the page content changes on every request.
+//  getServerSideProps is similar to getStaticProps, but the difference is that
+//  getServerSideProps is run on every request instead of on build time.
 export async function getServerSideProps({ params: { slug } }) {
   const res = await fetch(`${API_URL}/attractions?slug=${slug}`);
   const attractions = await res.json();
-  const paths = attractions.map((atr) => ({
-    params: { slug: atr.slug },
-  }));
   return {
     props: {
       attraction: attractions[0],
