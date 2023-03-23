@@ -20,18 +20,28 @@ export default function AttractionsPage({ attractions, page, total }) {
   );
 }
 
-export async function getServerSideProps({ query: { page = 1 } }) {
-  // calculate start page
-  const start = +page === 1 ? 0 : (+page - 1) * PER_PAGE;
+// export async function getServerSideProps({ query: { page = 1 } }) {
+//   // calculate start page
+//   const start = +page === 1 ? 0 : (+page - 1) * PER_PAGE;
 
-  const totalRes = await fetch(`${API_URL}/attractions/count`);
-  const total = await totalRes.json();
-  const atrRes = await fetch(
-    `${API_URL}/attractions?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
-  );
-  const attractions = await atrRes.json();
+//   const totalRes = await fetch(`${API_URL}/attractions/count`);
+//   const total = await totalRes.json();
+//   const atrRes = await fetch(
+//     `${API_URL}/attractions?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
+//   );
+//   const attractions = await atrRes.json();
 
+//   return {
+//     props: { attractions, page: +page, total },
+//   };
+// }
+export async function getStaticProps() {
+  const res = await fetch(`${API_URL}/attractions?_sort=date:ASC`);
+  // const res = await fetch(`${API_URL}/attractions`);
+  const attractions = await res.json();
+  console.log("attractions", attractions);
   return {
-    props: { attractions, page: +page, total },
+    props: { attractions },
+    revalidate: 1, // revalidate every 1 sec change
   };
 }
