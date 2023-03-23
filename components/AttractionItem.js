@@ -22,9 +22,7 @@ export default function AttractionItem({ attraction }) {
         <p>{attraction.description}</p>
       </div>
       <div className={styles.detail}>
-        <Link href={`/attractions/${attraction.slug}`}>
-          <a className="btn">Details</a>
-        </Link>
+        <Link href={`/attractions/${attraction.slug}`}>Details</Link>
       </div>
     </div>
   );

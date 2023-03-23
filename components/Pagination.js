@@ -8,15 +8,9 @@ export default function Pagination({ page, total }) {
   console.log(lastPage, "pagination");
   return (
     <>
-      {page > 1 && (
-        <Link href={`/attractions?page=${page - 1}`}>
-          <a className="btn-secondary">Prev</a>
-        </Link>
-      )}
+      {page > 1 && <Link href={`/attractions?page=${page - 1}`}>Prev</Link>}
       {page < lastPage && (
-        <Link href={`/attractions?page=${lastPage}`}>
-          <a className="btn-secondary">Next</a>
-        </Link>
+        <Link href={`/attractions?page=${lastPage}`}>Next</Link>
       )}
     </>
   );

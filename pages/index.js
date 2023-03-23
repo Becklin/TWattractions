@@ -17,9 +17,7 @@ export default function HomePage({ attractions }) {
       })}
       {attractions.length > 0 && (
         <div className={styles.controls}>
-          <Link href="attractions">
-            <a className="btn-secondary">View All Attractions</a>
-          </Link>
+          <Link href="attractions">View All Attractions</Link>
         </div>
       )}
     </Layout>

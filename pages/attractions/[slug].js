@@ -37,9 +37,7 @@ export default function AttractionPage({ attraction }) {
         )}
         <span className={styles.controls}>
           <Link href={`/attractions/edit/${attraction.id}`}>
-            <a className="btn-third">
-              <FaPencilAlt /> Edit Attraction
-            </a>
+            <FaPencilAlt /> Edit Attraction
           </Link>
           <a href="#" className="btn-third" onClick={deleteAttraction}>
             <FaTimes /> Delete Attraction
@@ -51,9 +49,7 @@ export default function AttractionPage({ attraction }) {
           {attraction.address} at {attraction.location}
         </span>
         <p>{attraction.description}</p>
-        <Link href="/attractions">
-          <a className={styles.back}>{"<"} Back</a>
-        </Link>
+        <Link href="/attractions">Back</Link>
       </div>
     </Layout>
   );

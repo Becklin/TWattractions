@@ -6,22 +6,16 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Link href="/">
-          <a>Taiwan Attractions</a>
-        </Link>
+        <Link href="/">Taiwan Attractions</Link>
       </div>
       <Search />
       <nav>
         <ul>
           <li>
-            <Link href="/attractions/add">
-              <a>Add Attractions</a>
-            </Link>
+            <Link href="/attractions/add">Add Attractions</Link>
           </li>
           <li>
-            <Link href="/attractions">
-              <a>Attractions</a>
-            </Link>
+            <Link href="/attractions">Attractions</Link>
           </li>
         </ul>
       </nav>
