@@ -35,6 +35,8 @@ export async function getStaticProps() {
     console.error(err);
   }
   return {
+    // Make sure that you don't pass any sensitive information
+    // that shouldn't be available on the client in props.
     props: { attractions },
     revalidate: 1, // revalidate every 1 sec change
   };

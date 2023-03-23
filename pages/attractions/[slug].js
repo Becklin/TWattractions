@@ -68,6 +68,11 @@ export default function AttractionPage({ attraction }) {
 export async function getServerSideProps({ params: { slug } }) {
   const res = await fetch(`${API_URL}/attractions?slug=${slug}`);
   const attractions = await res.json();
+  if (!attractions) {
+    return {
+      notFound: true,
+    };
+  }
   return {
     props: {
       attraction: attractions[0],
