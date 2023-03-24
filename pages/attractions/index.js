@@ -36,10 +36,17 @@ export default function AttractionsPage({ attractions, page, total }) {
 //   };
 // }
 export async function getStaticProps() {
-  const res = await fetch(`${API_URL}/attractions?_sort=date:ASC`);
-  // const res = await fetch(`${API_URL}/attractions`);
+  // const res = await fetch(`${API_URL}/attractions?_sort=date:ASC`);
+  const res = await fetch(
+    `https://www.travel.taipei/open-api/en/Attractions/All`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  );
   const attractions = await res.json();
-  console.log("attractions", attractions);
   return {
     props: { attractions },
     revalidate: 1, // revalidate every 1 sec change

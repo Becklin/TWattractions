@@ -28,9 +28,6 @@ export default function EditAttractions({ attraction }) {
   const [showModal, setShowModal] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // router.push();
-    // validation
-    console.log(values);
     const hasEmptyField = Object.values(values).some((val) => val === "");
     if (hasEmptyField) toast.error("please fill in all fields");
     const res = await fetch(`${API_URL}/attractions/${attraction.id}`, {
@@ -40,7 +37,6 @@ export default function EditAttractions({ attraction }) {
       },
       body: JSON.stringify(values),
     });
-    console.log("res", res);
 
     if (!res.ok) {
       toast.error("something went wrong");
@@ -54,14 +50,12 @@ export default function EditAttractions({ attraction }) {
     setValues({ ...values, [name]: value });
   };
   const uploadImage = async (e) => {
-    console.log("upload");
     const res = await fetch(`${API_URL}/attractions/${attraction.id}`);
     const data = await res.json();
-    console.log("資料", data);
     setImagePreview(data.image.formats.thumbnail.url);
     setShowModal(false);
   };
-  console.log(imagePreview);
+
   return (
     <Layout title="Update New Attraction">
       <Link className={styles.back} href="/attractions">

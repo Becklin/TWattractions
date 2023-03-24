@@ -18,7 +18,6 @@ export default function AddAttractions() {
   const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
     const hasEmptyField = Object.values(values).some((val) => val === "");
     if (hasEmptyField) toast.error("please fill in all fields");
     const res = await fetch(`${API_URL}/attractions/`, {
@@ -28,7 +27,6 @@ export default function AddAttractions() {
       },
       body: JSON.stringify(values),
     });
-    console.log("res", res);
 
     if (!res.ok) {
       toast.error("something went wrong");

@@ -7,6 +7,7 @@ export default function AttractionItem({ attraction }) {
     <div className={styles.attraction}>
       <div className={styles.img}>
         <Image
+          alt={attraction.name}
           src={
             attraction.image.url
               ? attraction.image.formats.thumbnail.url

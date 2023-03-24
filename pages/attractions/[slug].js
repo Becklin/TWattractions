@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 
 export default function AttractionPage({ attraction }) {
   const router = useRouter();
+  const { id } = router.query;
   const deleteAttraction = async (e) => {
     if (confirm("Are you sure?")) {
       const res = await fetch(`${API_URL}/attractions/${attraction.id}`, {
