@@ -25,7 +25,7 @@ export async function getServerSideProps({ query: { keyword } }) {
       _or: [
         { name_contains: keyword },
         { location_contains: keyword },
-        { description_contains: keyword },
+        // { introduction_contains: keyword },
       ],
     },
   });

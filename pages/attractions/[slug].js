@@ -36,20 +36,18 @@ export default function AttractionPage({ attraction }) {
             />
           </div>
         )}
-        <span className={styles.controls}>
-          <Link href={`/attractions/edit/${attraction.id}`}>
-            <FaPencilAlt /> Edit Attraction
-          </Link>
-          <a href="#" className="btn-third" onClick={deleteAttraction}>
-            <FaTimes /> Delete Attraction
-          </a>
-        </span>
+        <Link href={`/attractions/edit/${attraction.id}`}>
+          <FaPencilAlt /> Edit Attraction
+        </Link>
+        <a href="#" className="btn-third" onClick={deleteAttraction}>
+          <FaTimes /> Delete Attraction
+        </a>
         <h1>{attraction.name}</h1>
         <span className={styles.subinfo}>
           {new Date(attraction.date).toLocaleDateString("en-ca")}{" "}
           {attraction.address} at {attraction.location}
         </span>
-        <p>{attraction.description}</p>
+        <p>{attraction.introduction}</p>
         <Link href="/attractions">Back</Link>
       </div>
     </Layout>

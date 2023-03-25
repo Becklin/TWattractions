@@ -63,6 +63,77 @@ export default function EditAttractions({ attraction }) {
       </Link>
       <h1>Edit Attraction!</h1>
       <ToastContainer />
+      <div className="form-control w-full max-w-xs" onSubmit={handleSubmit}>
+        <label className="label" htmlFor="name">
+          <span className="label-text">Attraction name</span>
+          <span className="label-text-alt">Top Right label</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={values.name}
+          placeholder="Type here"
+          className="input input-bordered w-full max-w-xs"
+          onChange={handleInputChange}
+        />
+
+        <label className="label" htmlFor="Address">
+          <span className="label-text">Address</span>
+          <span className="label-text-alt">Top Right label</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={values.Address}
+          placeholder="Type here"
+          className="input input-bordered w-full max-w-xs"
+          onChange={handleInputChange}
+        />
+
+        <label className="label" htmlFor="location">
+          <span className="label-text">Location</span>
+          <span className="label-text-alt">Top Right label</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={values.location}
+          placeholder="Type here"
+          className="input input-bordered w-full max-w-xs"
+          onChange={handleInputChange}
+        />
+
+        <label className="label" htmlFor="date">
+          <span className="label-text">Date</span>
+          <span className="label-text-alt">Top Right label</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="date"
+          value={moment(values.date).format("YYYY-MM-DD")}
+          placeholder="Type here"
+          className="input input-bordered w-full max-w-xs"
+          onChange={handleInputChange}
+        />
+
+        <label className="label" htmlFor="introduction">
+          <span className="label-text">Introduction</span>
+          <span className="label-text-alt">Top Right label</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={values.introduction}
+          placeholder="Type here"
+          className="input input-bordered w-full max-w-xs"
+          onChange={handleInputChange}
+        />
+      </div>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.grid}>
           <div>
@@ -119,11 +190,11 @@ export default function EditAttractions({ attraction }) {
         </div>
       </form>
       <h2>Attraction Image</h2>
-      {imagePreview ? (
+      {/* {imagePreview ? (
         <Image src={imagePreview} height={100} width={170} />
       ) : (
         <div>No Image Uploaded</div>
-      )}
+      )} */}
 
       <div>
         <button className="btn-secondary" onClick={() => setShowModal(true)}>
