@@ -1,18 +1,18 @@
 import { useState } from "react";
+import { parseCookies } from "@/helpers/index";
 import { useRouter } from "next/router";
 import moment from "moment";
 import Link from "next/link";
 import Image from "next/image";
-import { FaImage } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "@/components/Layout";
+import TwInput from "@/components/TwInput";
 import Modal from "@/components/Modal";
 import ImageUpload from "@/components/ImageUpload";
 import { API_URL } from "@/config/index";
-import styles from "@/styles/Form.module.scss";
 
-export default function EditAttractions({ attraction }) {
+export default function EditAttractions({ attraction, token }) {
   const [values, setValues] = useState({
     name: attraction.name,
     location: attraction.location,
@@ -21,9 +21,9 @@ export default function EditAttractions({ attraction }) {
     description: attraction.description,
   });
   const [imagePreview, setImagePreview] = useState(
+    // attraction.image ? attraction.image.formats.thumbnail.url : null
     attraction.image ? attraction.image.formats.thumbnail.url : null
   );
-
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const handleSubmit = async (e) => {
@@ -34,11 +34,16 @@ export default function EditAttractions({ attraction }) {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(values),
     });
 
     if (!res.ok) {
+      if (res.status === 403 || res.status === 401) {
+        toast.error("No token included");
+        return;
+      }
       toast.error("something went wrong");
     } else {
       const atr = await res.json();
@@ -58,160 +63,105 @@ export default function EditAttractions({ attraction }) {
 
   return (
     <Layout title="Update New Attraction">
-      <Link className={styles.back} href="/attractions">
+      <ToastContainer />
+      <Image
+        priority
+        alt="background image"
+        src="/images/vacation.jpg"
+        fill
+        className="z-0 object-cover"
+      />
+      <Link className={""} href="/attractions">
         Back
       </Link>
-      <h1>Edit Attraction!</h1>
-      <ToastContainer />
-      <div className="form-control w-full max-w-xs" onSubmit={handleSubmit}>
-        <label className="label" htmlFor="name">
-          <span className="label-text">Attraction name</span>
-          <span className="label-text-alt">Top Right label</span>
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={values.name}
-          placeholder="Type here"
-          className="input input-bordered w-full max-w-xs"
-          onChange={handleInputChange}
-        />
-
-        <label className="label" htmlFor="Address">
-          <span className="label-text">Address</span>
-          <span className="label-text-alt">Top Right label</span>
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={values.Address}
-          placeholder="Type here"
-          className="input input-bordered w-full max-w-xs"
-          onChange={handleInputChange}
-        />
-
-        <label className="label" htmlFor="location">
-          <span className="label-text">Location</span>
-          <span className="label-text-alt">Top Right label</span>
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={values.location}
-          placeholder="Type here"
-          className="input input-bordered w-full max-w-xs"
-          onChange={handleInputChange}
-        />
-
-        <label className="label" htmlFor="date">
-          <span className="label-text">Date</span>
-          <span className="label-text-alt">Top Right label</span>
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="date"
-          value={moment(values.date).format("YYYY-MM-DD")}
-          placeholder="Type here"
-          className="input input-bordered w-full max-w-xs"
-          onChange={handleInputChange}
-        />
-
-        <label className="label" htmlFor="introduction">
-          <span className="label-text">Introduction</span>
-          <span className="label-text-alt">Top Right label</span>
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={values.introduction}
-          placeholder="Type here"
-          className="input input-bordered w-full max-w-xs"
-          onChange={handleInputChange}
-        />
-      </div>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.grid}>
-          <div>
-            <label htmlFor="name">Event Name</label>
-            <input
+      <form
+        className="z-10 relative form-control w-full max-w-lg"
+        onSubmit={handleSubmit}
+      >
+        <h2>Update Attractions</h2>
+        <div className="flex justify-between gap-4">
+          <div className="flex-1">
+            <TwInput
               type="text"
-              id="name"
               name="name"
               value={values.name}
-              onChange={handleInputChange}
+              placeholder="Name"
+              handleInputChange={handleInputChange}
             />
           </div>
-          <div>
-            <label htmlFor="name">Address</label>
-            <input
+          <div className="flex-1">
+            <TwInput
               type="text"
-              id="address"
               name="address"
               value={values.address}
-              onChange={handleInputChange}
+              placeholder="Address"
+              handleInputChange={handleInputChange}
             />
           </div>
-          <div>
-            <label htmlFor="name">Location</label>
-            <input
+        </div>
+        <div className="flex justify-between gap-4">
+          <div className="flex-1">
+            <TwInput
               type="text"
-              id="location"
               name="location"
               value={values.location}
-              onChange={handleInputChange}
+              placeholder="location"
+              handleInputChange={handleInputChange}
             />
           </div>
-          <div>
-            <label htmlFor="name">Date</label>
-            <input
+          <div className="flex-1">
+            <TwInput
               type="date"
-              id="date"
               name="date"
               value={moment(values.date).format("YYYY-MM-DD")}
-              onChange={handleInputChange}
+              placeholder="select date"
+              handleInputChange={handleInputChange}
             />
           </div>
-          <div>
-            <label htmlFor="name">Description</label>
-            <input
-              type="text"
-              id="description"
-              name="description"
-              value={values.description}
-              onChange={handleInputChange}
-            />
-          </div>
-          <input type="submit" className="btn" value="Update Attraction" />
         </div>
+        <label className="label" htmlFor="introduction">
+          <span className="label-text text-white">Introduction</span>
+        </label>
+        <textarea
+          id="introduction"
+          name="introduction"
+          value={values.introduction}
+          onChange={handleInputChange}
+          className="textarea textarea-bordered"
+          placeholder="introduction"
+        ></textarea>
+        <input type="submit" className="btn mt-8" value="Update Attraction" />
       </form>
-      <h2>Attraction Image</h2>
-      {/* {imagePreview ? (
-        <Image src={imagePreview} height={100} width={170} />
-      ) : (
-        <div>No Image Uploaded</div>
-      )} */}
-
-      <div>
-        <button className="btn-secondary" onClick={() => setShowModal(true)}>
-          <FaImage /> Set Image
+      <div className="z-10 relative">
+        {imagePreview ? (
+          <div className="my-4 overflow-hidden rounded-4">
+            <Image src={imagePreview} width="200" height="170" />
+          </div>
+        ) : (
+          <div>No Image Uploaded</div>
+        )}
+        <button className="btn " onClick={() => setShowModal(true)}>
+          Set Image
         </button>
+        <Modal show={showModal} onClose={() => setShowModal(false)}>
+          <ImageUpload
+            atrId={attraction.id}
+            imageUploaded={uploadImage}
+            token={token}
+          />
+        </Modal>
       </div>
-      <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload atrId={attraction.id} imageUploaded={uploadImage} />
-      </Modal>
     </Layout>
   );
 }
 
-export async function getServerSideProps({ params: { id } }) {
+export async function getServerSideProps({ params: { id }, req }) {
+  const { token } = parseCookies(req);
+
   const res = await fetch(`${API_URL}/attractions/${id}`);
   const attraction = await res.json();
+
   return {
-    props: { attraction },
+    props: { attraction, token },
   };
 }

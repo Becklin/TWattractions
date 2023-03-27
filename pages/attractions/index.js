@@ -8,8 +8,10 @@ import { API_URL, PER_PAGE } from "@/config/index";
 export default function AttractionsPage({ attractions, page, total }) {
   return (
     <Layout>
-      <h1>Home</h1>
-      {attractions.length === 0 && <h3>No Attractions to show</h3>}
+      {!attractions && <h3>No Attraction to show</h3>}
+      {/* {data.map((d) => {
+        return <AttractionItem key={d.id} attraction={d} />;
+      })} */}
       {attractions.map((attraction) => {
         return <AttractionItem key={attraction.id} attraction={attraction} />;
       })}
@@ -36,17 +38,13 @@ export default function AttractionsPage({ attractions, page, total }) {
 //   };
 // }
 export async function getStaticProps() {
-  // const res = await fetch(`${API_URL}/attractions?_sort=date:ASC`);
-  const res = await fetch(
-    `https://www.travel.taipei/open-api/en/Attractions/All`,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-      },
-    }
-  );
-  const attractions = await res.json();
+  let attractions = [];
+  try {
+    const res = await fetch(`${API_URL}/attractions?_sort=date:DESC`);
+    attractions = await res.json();
+  } catch (err) {
+    console.error(err);
+  }
   return {
     props: { attractions },
     revalidate: 1, // revalidate every 1 sec change

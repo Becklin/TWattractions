@@ -1,11 +1,16 @@
 import Link from "next/link";
+import Image from "next/image";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import Search from "./Search";
 
+import { useContext } from "react";
+import AuthContext from "@/context/AuthContext";
+
 export default function Header() {
+  const { logout, user } = useContext(AuthContext);
   return (
-    <div class="z-10 fixed top-0 navbar bg-slate-800">
-      <div class="flex-1">
+    <div className="z-10 fixed top-0 navbar bg-slate-800">
+      <div className="flex-1">
         <Link
           className="btn btn-ghost normal-case text-xl text-slate-100"
           href="/"
@@ -13,44 +18,47 @@ export default function Header() {
           Taiwan Attractions
         </Link>
       </div>
-      <div class="flex-none gap-2">
+      <div className="flex-none gap-2">
         <Search />
-        {/* <div class="form-control">
-          <input
-            type="text"
-            placeholder="Search"
-            class="input input-bordered"
-          />
-        </div> */}
-        <Link
-          className="btn btn-ghost normal-case text-xl text-slate-100"
-          href="/attractions/add"
-        >
-          Add Attractions
-        </Link>
-        <div class="dropdown dropdown-end">
-          <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-            <div class="w-10 rounded-full">
-              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+        {user && (
+          <Link
+            className="btn btn-ghost normal-case text-xl text-slate-100"
+            href="/attractions/add"
+          >
+            Add Attractions
+          </Link>
+        )}
+        <div className="dropdown dropdown-end">
+          <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 rounded-full">
+              <Image
+                priority
+                src="/images/profile.svg"
+                height={28}
+                width={28}
+                alt="profile"
+              />
             </div>
           </label>
           <ul
-            tabindex="0"
-            class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+            tabIndex="0"
+            className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
           >
-            {/* <li>
-              <a class="justify-between">
-                Profile
-                <span class="badge">New</span>
-              </a>
-            </li>
+            {user && (
+              <li>
+                <a>Dashboard</a>
+              </li>
+            )}
             <li>
-              <a>Settings</a>
-            </li> */}
-            <li>
-              <Link href="/account/login">
-                <FaSignInAlt></FaSignInAlt>Login
-              </Link>
+              {user ? (
+                <button onClick={() => logout()}>
+                  <FaSignOutAlt></FaSignOutAlt>logout
+                </button>
+              ) : (
+                <Link href="/account/login">
+                  <FaSignInAlt></FaSignInAlt>Login
+                </Link>
+              )}
             </li>
           </ul>
         </div>

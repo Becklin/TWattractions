@@ -32,9 +32,6 @@ export default function AttractionMap({ attraction }) {
   }, []);
   Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_API_KEY);
   if (loading) return false;
-  console.log(process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN);
-  console.log(process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN);
-
   return (
     <ReactMapGl
       {...viewport}

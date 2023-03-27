@@ -3,13 +3,11 @@ import Image from "next/image";
 import { FaPencilAlt, FaTimes } from "react-icons/fa";
 import { API_URL } from "@/config/index";
 import Layout from "@/components/Layout";
-import styles from "@/styles/Attraction.module.scss";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
 export default function AttractionPage({ attraction }) {
   const router = useRouter();
-  const { id } = router.query;
   const deleteAttraction = async (e) => {
     if (confirm("Are you sure?")) {
       const res = await fetch(`${API_URL}/attractions/${attraction.id}`, {
@@ -26,28 +24,42 @@ export default function AttractionPage({ attraction }) {
 
   return (
     <Layout>
-      <div className={styles.attraction}>
+      <h2 className="flex items-center justify-between">
+        {attraction.name}{" "}
+        <div className="btn-group ">
+          <button className="btn btn-active btn-sm normal-case">
+            <Link href={`/attractions/edit/${attraction.id}`}>
+              Edit Attraction
+            </Link>
+          </button>
+          <button className="btn btn-sm normal-case">
+            <a href="#" className="btn-third" onClick={deleteAttraction}>
+              Delete Attraction
+            </a>
+          </button>
+        </div>
+      </h2>
+      <div className="flex gap-6 mb-6 w-full">
         {attraction.image && (
-          <div className={styles.image}>
+          <section className="flex-1">
             <Image
+              priority
               src={attraction.image.formats.medium.url}
-              width={960}
-              height={600}
+              width={760}
+              height={400}
             />
-          </div>
+            <span className="text-sm text-slate-500 inline-block my-3">
+              {new Date(attraction.date).toLocaleDateString("en-ca")}{" "}
+              {attraction.address} at {attraction.location}
+              {/* official site */}
+            </span>
+          </section>
         )}
-        <Link href={`/attractions/edit/${attraction.id}`}>
-          <FaPencilAlt /> Edit Attraction
-        </Link>
-        <a href="#" className="btn-third" onClick={deleteAttraction}>
-          <FaTimes /> Delete Attraction
-        </a>
-        <h1>{attraction.name}</h1>
-        <span className={styles.subinfo}>
-          {new Date(attraction.date).toLocaleDateString("en-ca")}{" "}
-          {attraction.address} at {attraction.location}
-        </span>
-        <p>{attraction.introduction}</p>
+        <section className="flex-1">
+          <p>{attraction.introduction}</p>
+        </section>
+      </div>
+      <div className="flex w-full justify-between items-center">
         <Link href="/attractions">Back</Link>
       </div>
     </Layout>

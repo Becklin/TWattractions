@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function AttractionItem({ attraction }) {
-  console.log(attraction.images);
   return (
     <div>
       <div className="card lg:card-side lg:h-28 bg-white shadow-lg my-4">
@@ -13,9 +12,9 @@ export default function AttractionItem({ attraction }) {
           <Image
             alt={attraction.name}
             src={
-              attraction.image.url
+              attraction.image && attraction.image.url
                 ? attraction.image.formats.thumbnail.url
-                : "/images/default.png"
+                : "/images/default_image.svg"
             }
             fill
           />
@@ -24,7 +23,7 @@ export default function AttractionItem({ attraction }) {
           <h4 className="card-title text-slate-700 flex justify-between">
             {attraction.name}{" "}
             <Link
-              className="btn btn-xs btn-primary"
+              className="btn btn-xs btn-primary normal-case"
               href={`/attractions/${attraction.slug}`}
             >
               Details
