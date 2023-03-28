@@ -24,27 +24,31 @@ export default function AttractionPage({ attraction }) {
 
   return (
     <Layout>
-      <h2 className="flex items-center justify-between">
-        {attraction.name}{" "}
-        <div className="btn-group ">
-          <button className="btn btn-active btn-sm normal-case">
-            <Link href={`/attractions/edit/${attraction.id}`}>
-              Edit Attraction
-            </Link>
-          </button>
-          <button className="btn btn-sm normal-case">
-            <a href="#" className="btn-third" onClick={deleteAttraction}>
-              Delete Attraction
-            </a>
-          </button>
-        </div>
-      </h2>
-      <div className="flex gap-6 mb-6 w-full">
-        {attraction.image && (
+      <div className="mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto">
+        <h2 className="flex items-center justify-between">
+          {attraction.name}{" "}
+          <div className="btn-group ">
+            <button className="btn btn-active btn-sm normal-case">
+              <Link href={`/attractions/edit/${attraction.id}`}>
+                Edit Attraction
+              </Link>
+            </button>
+            <button className="btn btn-sm normal-case">
+              <a href="#" className="btn-third" onClick={deleteAttraction}>
+                Delete Attraction
+              </a>
+            </button>
+          </div>
+        </h2>
+        <div className="flex gap-6 mb-6 w-full">
           <section className="flex-1">
             <Image
               priority
-              src={attraction.image.formats.medium.url}
+              src={
+                attraction.image && attraction.image.formats.medium.url
+                  ? attraction.image.formats.medium.url
+                  : "/images/default_image.svg"
+              }
               width={760}
               height={400}
             />
@@ -54,13 +58,13 @@ export default function AttractionPage({ attraction }) {
               {/* official site */}
             </span>
           </section>
-        )}
-        <section className="flex-1">
-          <p>{attraction.introduction}</p>
-        </section>
-      </div>
-      <div className="flex w-full justify-between items-center">
-        <Link href="/attractions">Back</Link>
+          <section className="flex-1">
+            <p>{attraction.introduction}</p>
+          </section>
+        </div>
+        <div className="flex w-full justify-between items-center">
+          <Link href="/attractions">Back</Link>
+        </div>
       </div>
     </Layout>
   );

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styles from "@/styles/Form.module.scss";
 import { API_URL } from "../config";
 
 export default function ImageUpload({ atrId, imageUploaded, token }) {
@@ -11,7 +10,7 @@ export default function ImageUpload({ atrId, imageUploaded, token }) {
     formData.append("ref", "attractions");
     formData.append("refId", atrId);
     formData.append("field", "image");
-    const res = await fetch(`${API_URL}/api/upload`, {
+    const res = await fetch(`${API_URL}/upload`, {
       method: "POST",
       body: formData,
       headers: {

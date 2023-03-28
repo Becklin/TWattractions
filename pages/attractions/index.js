@@ -1,13 +1,12 @@
 import Layout from "@/components/Layout";
-import styles from "@/styles/Layout.module.scss";
-
+import ListLayout from "@/components/ListLayout";
 import AttractionItem from "@/components/AttractionItem";
 import Pagination from "@/components/Pagination";
 import { API_URL, PER_PAGE } from "@/config/index";
 
 export default function AttractionsPage({ attractions, page, total }) {
   return (
-    <Layout>
+    <>
       {!attractions && <h3>No Attraction to show</h3>}
       {/* {data.map((d) => {
         return <AttractionItem key={d.id} attraction={d} />;
@@ -15,38 +14,44 @@ export default function AttractionsPage({ attractions, page, total }) {
       {attractions.map((attraction) => {
         return <AttractionItem key={attraction.id} attraction={attraction} />;
       })}
-      <div className={styles.controls}>
+      <div>
         <Pagination page={page} total={total} />
       </div>
-    </Layout>
+    </>
   );
 }
 
-// export async function getServerSideProps({ query: { page = 1 } }) {
-//   // calculate start page
-//   const start = +page === 1 ? 0 : (+page - 1) * PER_PAGE;
+AttractionsPage.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      <ListLayout>{page}</ListLayout>
+    </Layout>
+  );
+};
+export async function getServerSideProps({ query: { page = 1 } }) {
+  const start = +page === 1 ? 0 : (+page - 1) * PER_PAGE;
 
-//   const totalRes = await fetch(`${API_URL}/attractions/count`);
-//   const total = await totalRes.json();
-//   const atrRes = await fetch(
-//     `${API_URL}/attractions?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
-//   );
-//   const attractions = await atrRes.json();
+  const totalRes = await fetch(`${API_URL}/attractions/count`);
+  const total = await totalRes.json();
+  const atrRes = await fetch(
+    `${API_URL}/attractions?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
+  );
+  const attractions = await atrRes.json();
 
-//   return {
-//     props: { attractions, page: +page, total },
-//   };
-// }
-export async function getStaticProps() {
-  let attractions = [];
-  try {
-    const res = await fetch(`${API_URL}/attractions?_sort=date:DESC`);
-    attractions = await res.json();
-  } catch (err) {
-    console.error(err);
-  }
   return {
-    props: { attractions },
-    revalidate: 1, // revalidate every 1 sec change
+    props: { attractions, page: +page, total },
   };
 }
+// export async function getStaticProps() {
+//   let attractions = [];
+//   try {
+//     const res = await fetch(`${API_URL}/attractions?_sort=date:DESC`);
+//     attractions = await res.json();
+//   } catch (err) {
+//     console.error(err);
+//   }
+//   return {
+//     props: { attractions },
+//     revalidate: 1, // revalidate every 1 sec change
+//   };
+// }

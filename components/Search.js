@@ -22,7 +22,7 @@ export default function Search() {
           placeholder="Search attractions"
           className="input input-bordered text-slate-700"
         />
-        <button onClick={handleSubmit} className="btn btn-square">
+        <button onClick={handleSubmit} className="btn btn-square btn-info">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"

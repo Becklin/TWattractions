@@ -6,9 +6,6 @@ export default function AttractionItem({ attraction }) {
     <div>
       <div className="card lg:card-side lg:h-28 bg-white shadow-lg my-4">
         <figure className="block w-40 relative shrink-0">
-          {/* {attraction.images && attraction.images.length > 0 && (
-            <Image alt={attraction.name} src={attraction.images[0].src} fill />
-          )} */}
           <Image
             alt={attraction.name}
             src={

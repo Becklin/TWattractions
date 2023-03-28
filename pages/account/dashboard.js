@@ -1,6 +1,7 @@
 import { parseCookies } from "@/helpers/index";
 import { useRouter } from "next/router";
 import Layout from "@/components/Layout";
+import ListLayout from "@/components/ListLayout";
 import DashboardAttraction from "@/components/DashboardAttraction";
 import { API_URL } from "@/config/index";
 
@@ -27,23 +28,28 @@ export default function DashboardPage({ attractions, token }) {
   };
 
   return (
-    <Layout title="User Dashboard">
+    <>
       <div>
         <h1>Dashboard</h1>
         <h3>My Posts</h3>
-
-        {attractions.map((evt) => (
+        {attractions.map((attraction) => (
           <DashboardAttraction
-            key={evt.id}
-            evt={evt}
+            key={attraction.id}
+            attraction={attraction}
             handleDelete={deleteAttraction}
           />
         ))}
       </div>
-    </Layout>
+    </>
   );
 }
-
+DashboardPage.getLayout = function getLayout(page) {
+  return (
+    <Layout title="User Dashboard">
+      <ListLayout>{page}</ListLayout>
+    </Layout>
+  );
+};
 export async function getServerSideProps({ req }) {
   const { token } = parseCookies(req);
 

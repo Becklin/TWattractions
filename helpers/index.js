@@ -1,5 +1,9 @@
 import cookie from "cookie";
 
 export function parseCookies(req) {
-  return cookie.parse(req ? req.headers.cookie || "" : "");
+  let token = cookie.parse(req ? req.headers.cookie || "" : "");
+  if (token == {}) {
+    token = null;
+  }
+  return token;
 }

@@ -66,7 +66,7 @@ export default function LoginPage() {
         <input type="submit" className="btn mt-8" value="Login" />
       </form>
       <p className="z-10 relative my-4">
-        Don't have an account? <Link href="/account/register">Register</Link>
+        Do not have an account? <Link href="/account/register">Register</Link>
       </p>
       <Link href="/attractions">Back</Link>
       <div className="divider"></div>

@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import styles from "@/styles/Layout.module.scss";
 export default function Layout({ title, keywords, description, children }) {
   return (
     <div>
@@ -11,7 +10,9 @@ export default function Layout({ title, keywords, description, children }) {
         <meta name="keywords" content={keywords} />
       </Head>
       <Header />
-      <div className={styles.container}>{children}</div>
+      {/* <div className="mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto relative"> */}
+      {children}
+      {/* </div> */}
       <Footer />
     </div>
   );

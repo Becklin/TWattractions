@@ -63,93 +63,95 @@ export default function EditAttractions({ attraction, token }) {
 
   return (
     <Layout title="Update New Attraction">
-      <ToastContainer />
-      <Image
-        priority
-        alt="background image"
-        src="/images/vacation.jpg"
-        fill
-        className="z-0 object-cover"
-      />
-      <Link className={""} href="/attractions">
-        Back
-      </Link>
-      <form
-        className="z-10 relative form-control w-full max-w-lg"
-        onSubmit={handleSubmit}
-      >
-        <h2>Update Attractions</h2>
-        <div className="flex justify-between gap-4">
-          <div className="flex-1">
-            <TwInput
-              type="text"
-              name="name"
-              value={values.name}
-              placeholder="Name"
-              handleInputChange={handleInputChange}
-            />
+      <div className="mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto">
+        <ToastContainer />
+        <Image
+          priority
+          alt="background image"
+          src="/images/vacation.jpg"
+          fill
+          className="z-0 object-cover"
+        />
+        <Link className={""} href="/attractions">
+          Back
+        </Link>
+        <form
+          className="z-10 relative form-control w-full max-w-lg"
+          onSubmit={handleSubmit}
+        >
+          <h2>Update Attractions</h2>
+          <div className="flex justify-between gap-4">
+            <div className="flex-1">
+              <TwInput
+                type="text"
+                name="name"
+                value={values.name}
+                placeholder="Name"
+                handleInputChange={handleInputChange}
+              />
+            </div>
+            <div className="flex-1">
+              <TwInput
+                type="text"
+                name="address"
+                value={values.address}
+                placeholder="Address"
+                handleInputChange={handleInputChange}
+              />
+            </div>
           </div>
-          <div className="flex-1">
-            <TwInput
-              type="text"
-              name="address"
-              value={values.address}
-              placeholder="Address"
-              handleInputChange={handleInputChange}
-            />
+          <div className="flex justify-between gap-4">
+            <div className="flex-1">
+              <TwInput
+                type="text"
+                name="location"
+                value={values.location}
+                placeholder="location"
+                handleInputChange={handleInputChange}
+              />
+            </div>
+            <div className="flex-1">
+              <TwInput
+                type="date"
+                name="date"
+                value={moment(values.date).format("YYYY-MM-DD")}
+                placeholder="select date"
+                handleInputChange={handleInputChange}
+              />
+            </div>
           </div>
+          <label className="label" htmlFor="introduction">
+            <span className="label-text text-white">Introduction</span>
+          </label>
+          <textarea
+            id="introduction"
+            name="introduction"
+            value={values.introduction}
+            onChange={handleInputChange}
+            className="textarea textarea-bordered"
+            placeholder="introduction"
+          ></textarea>
+          <input type="submit" className="btn mt-8" value="Update Attraction" />
+        </form>
+        <div className="z-10 relative">
+          {imagePreview ? (
+            <div className="my-4 overflow-hidden rounded-4">
+              <Image src={imagePreview} width="200" height="170" />
+            </div>
+          ) : (
+            <div>No Image Uploaded</div>
+          )}
+          <button className="btn " onClick={() => setShowModal(true)}>
+            Set Image
+          </button>
+          <Modal show={showModal} onClose={() => setShowModal(false)}>
+            <ImageUpload
+              atrId={attraction.id}
+              imageUploaded={uploadImage}
+              token={token}
+            />
+          </Modal>
         </div>
-        <div className="flex justify-between gap-4">
-          <div className="flex-1">
-            <TwInput
-              type="text"
-              name="location"
-              value={values.location}
-              placeholder="location"
-              handleInputChange={handleInputChange}
-            />
-          </div>
-          <div className="flex-1">
-            <TwInput
-              type="date"
-              name="date"
-              value={moment(values.date).format("YYYY-MM-DD")}
-              placeholder="select date"
-              handleInputChange={handleInputChange}
-            />
-          </div>
-        </div>
-        <label className="label" htmlFor="introduction">
-          <span className="label-text text-white">Introduction</span>
-        </label>
-        <textarea
-          id="introduction"
-          name="introduction"
-          value={values.introduction}
-          onChange={handleInputChange}
-          className="textarea textarea-bordered"
-          placeholder="introduction"
-        ></textarea>
-        <input type="submit" className="btn mt-8" value="Update Attraction" />
-      </form>
-      <div className="z-10 relative">
-        {imagePreview ? (
-          <div className="my-4 overflow-hidden rounded-4">
-            <Image src={imagePreview} width="200" height="170" />
-          </div>
-        ) : (
-          <div>No Image Uploaded</div>
-        )}
-        <button className="btn " onClick={() => setShowModal(true)}>
-          Set Image
-        </button>
-        <Modal show={showModal} onClose={() => setShowModal(false)}>
-          <ImageUpload
-            atrId={attraction.id}
-            imageUploaded={uploadImage}
-            token={token}
-          />
-        </Modal>
       </div>
     </Layout>
   );

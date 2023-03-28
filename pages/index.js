@@ -1,33 +1,39 @@
 import Layout from "@/components/Layout";
+import ListLayout from "@/components/ListLayout";
 import AttractionItem from "@/components/AttractionItem";
-import styles from "@/styles/Layout.module.scss";
 import { API_URL, PER_PAGE } from "@/config/index";
 import Link from "next/link";
 
-export default function HomePage({ attractions, taipei }) {
-  console.log(attractions);
+export default function HomePage({ attractions }) {
   return (
-    <Layout>
+    <>
       {!attractions && <h3>No Attraction to show</h3>}
-      {/* {data.map((d) => {
-        return <AttractionItem key={d.id} attraction={d} />;
-      })} */}
       {attractions.map((attraction) => {
         return <AttractionItem key={attraction.id} attraction={attraction} />;
       })}
       {attractions.length > 0 && (
-        <div className={styles.controls}>
+        <div>
           {/* Any <Link /> in the viewport (initially or through scroll) will be prefetched 
           by default (including the corresponding data) for pages using Static Generation. 
           The corresponding data for server-rendered routes is fetched only 
           when the <Link /> is clicked. */}
           {/* client-side route transitions */}
-          <Link href="attractions">View All Attractions</Link>
+          <Link className="btn normal-case" href="attractions">
+            View All Attractions
+          </Link>
         </div>
       )}
-    </Layout>
+    </>
   );
 }
+
+HomePage.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      <ListLayout>{page}</ListLayout>
+    </Layout>
+  );
+};
 
 export async function getStaticProps() {
   let attractions = [];

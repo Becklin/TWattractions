@@ -46,7 +46,9 @@ export default function Header() {
           >
             {user && (
               <li>
-                <a>Dashboard</a>
+                <Link href="/account/dashboard">
+                  <FaSignInAlt></FaSignInAlt>Dashboard
+                </Link>
               </li>
             )}
             <li>
