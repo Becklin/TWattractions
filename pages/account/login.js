@@ -8,7 +8,7 @@ import Layout from "@/components/Layout";
 import TwInput from "@/components/TwInput";
 
 import AuthContext from "@/context/AuthContext";
-import { NEXT_URL } from "@/config/index";
+import { NEXT_URL, API_URL } from "@/config/index";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
