@@ -12,7 +12,12 @@ export default function AttractionsPage({ attractions, page, total }) {
         return <AttractionItem key={d.id} attraction={d} />;
       })} */}
       {attractions.map((attraction) => {
-        return <AttractionItem key={attraction.id} attraction={attraction} />;
+        return (
+          <AttractionItem
+            key={attraction.id}
+            attraction={attraction.attributes}
+          />
+        );
       })}
       <div>
         <Pagination page={page} total={total} />
@@ -36,10 +41,10 @@ export async function getServerSideProps({ query: { page = 1 } }) {
   const atrRes = await fetch(
     `${API_URL}/attractions?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
   );
-  const attractions = await atrRes.json();
+  const response = await atrRes.json();
 
   return {
-    props: { attractions, page: +page, total },
+    props: { attractions: response.data, page: +page, total },
   };
 }
 // export async function getStaticProps() {
