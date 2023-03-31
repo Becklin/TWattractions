@@ -4,11 +4,11 @@ import Image from "next/image";
 export default function ListLayout({ children }) {
   return (
     <>
-      <div className="absolute top-0 w-full h-96 bg-black">
+      <div className="absolute top-0 w-full h-full bg-black">
         <Image
           priority
           alt="background image"
-          src="/images/hero.png"
+          src="/images/sky.jpeg"
           fill
           className="z-0 object-cover"
         />

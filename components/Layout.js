@@ -10,9 +10,7 @@ export default function Layout({ title, keywords, description, children }) {
         <meta name="keywords" content={keywords} />
       </Head>
       <Header />
-      {/* <div className="mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto relative"> */}
       {children}
-      {/* </div> */}
       <Footer />
     </div>
   );
