@@ -8,6 +8,7 @@ import Layout from "@/components/Layout";
 import TwInput from "@/components/TwInput";
 
 import AuthContext from "@/context/AuthContext";
+import { NEXT_URL } from "@/config/index";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -50,6 +51,8 @@ export default function LoginPage() {
               placeholder="email"
               handleInputChange={(e) => setEmail(e.target.value)}
             />
+            NEXT_URL {NEXT_URL}
+            API_URL {API_URL}
           </div>
         </div>
         <div className="flex justify-between gap-4">
