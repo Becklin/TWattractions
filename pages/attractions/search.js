@@ -14,7 +14,11 @@ export default function SearchPage({ attractions }) {
       <h1>Search Results for {router.query.keyword}</h1>
       {attractions.length === 0 && <h3>No Attractions to show</h3>}
       {attractions.map((attraction) => {
-        return <AttractionItem key={attraction.id} attraction={attraction} />;
+        const newAttr = {
+          ...attraction.attributes,
+          id: attraction.id,
+        };
+        return <AttractionItem key={attraction.id} attraction={newAttr} />;
       })}
     </>
   );

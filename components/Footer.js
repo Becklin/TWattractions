@@ -16,7 +16,7 @@ export default function Footer() {
       </Link>
       <Link
         className="w-4 inline-block"
-        href="https://www.linkedin.com/in/beck-lin/"
+        href="https://www.linkedin.com/in/beck-yenwen/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn"
