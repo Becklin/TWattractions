@@ -117,21 +117,10 @@ export default function AddAttractions({ token }) {
             className="textarea textarea-bordered"
             placeholder="introduction"
           ></textarea>
-          {/* <label className="label" htmlFor="image">
-          <span className="label-text text-white">Image</span>
-        </label>
-        <input
-          id="image"
-          name="image"
-          type="file"
-          onChange={(e) => setFiles(e.target)}
-          className="file-input file-input-bordered w-full max-w-xs"
-        /> */}
           <input type="submit" className="btn mt-8" value="Add Attraction" />
         </form>
         <Link href="/attractions">Back</Link>
         <div className="divider"></div>
-        {/* TODO: figure out how to submit the form with file type */}
       </div>
     </Layout>
   );

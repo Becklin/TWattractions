@@ -1,6 +1,8 @@
 import { parseCookies } from "@/helpers/index";
 import { useRouter } from "next/router";
 import Layout from "@/components/Layout";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ListLayout from "@/components/ListLayout";
 import DashboardAttraction from "@/components/DashboardAttraction";
 import { API_URL } from "@/config/index";
@@ -29,12 +31,14 @@ export default function DashboardPage({ attractions = [], token }) {
   return (
     <>
       <div>
+        <ToastContainer />
         <h1>Dashboard</h1>
         <h3>My Posts</h3>
-        {attractions.map((attraction) => (
+        {attractions.map(({ id, attributes }) => (
           <DashboardAttraction
-            key={attraction.id}
-            attraction={attraction}
+            key={id}
+            id={id}
+            attributes={attributes}
             handleDelete={deleteAttraction}
           />
         ))}
@@ -57,7 +61,6 @@ export async function getServerSideProps({ req }) {
       Authorization: `Bearer ${token}`,
     },
   });
-
   const response = await res.json();
   return {
     props: {

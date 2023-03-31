@@ -5,34 +5,35 @@ import cookie from "cookie";
 export default async (req, res) => {
   if (req.method === "POST") {
     const { identifier, password } = req.body;
-    const StrapiRes = await fetch(`${API_URL}/auth/local`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        identifier,
-        password,
-      }),
-    });
-    const data = await StrapiRes.json();
-    if (StrapiRes.ok) {
-      // Set Cookie
-      res.setHeader(
-        "Set-Cookie",
-        cookie.serialize("token", data.jwt, {
-          httpOnly: true, // meaning the client side js can't have access to the cookie
-          secure: process.env.NODE_ENV !== "development",
-          maxAge: 60 * 60 * 24 * 7, // 1 week
-          sameSite: "strict",
-          path: "/", // we can get the cookie everywhere
-        })
-      );
-      res.status(200).json({ user: data.user });
-    } else {
-      res
-        .status(data.statusCode)
-        .json({ message: data.message[0].messages[0].message });
+    try {
+      const StrapiRes = await fetch(`${API_URL}/auth/local`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          identifier,
+          password,
+        }),
+      });
+      const data = await StrapiRes.json();
+      if (StrapiRes.ok) {
+        res.setHeader(
+          "Set-Cookie",
+          cookie.serialize("token", data.jwt, {
+            httpOnly: true, // meaning the client side js can't have access to the cookie
+            secure: process.env.NODE_ENV !== "development",
+            maxAge: 60 * 60 * 24 * 7,
+            sameSite: "strict",
+            path: "/",
+          })
+        );
+        res.status(200).json({ user: data.user });
+      } else {
+        res.status(data.error.status).json({ message: data.error.message });
+      }
+    } catch (err) {
+      console.error(err.message);
     }
   } else {
     res.setHeader("allow", ["POST"]);

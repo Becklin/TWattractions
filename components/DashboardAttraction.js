@@ -1,16 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function DashboardAttraction({ attraction, handleDelete }) {
+export default function DashboardAttraction({ attributes, id, handleDelete }) {
+  const { name, image, introduction, slug } = attributes;
   return (
     <div>
       <div className="card lg:card-side lg:h-28 bg-white shadow-lg my-4">
         <figure className="block w-40 relative shrink-0">
           <Image
-            alt={attraction.name}
+            alt={name}
             src={
-              attraction.image && attraction.image.url
-                ? attraction.image.formats.thumbnail.url
+              image && image.url
+                ? image.formats.thumbnail.url
                 : "/images/default_image.svg"
             }
             fill
@@ -18,27 +19,27 @@ export default function DashboardAttraction({ attraction, handleDelete }) {
         </figure>
         <div className="card-body">
           <h4 className="card-title text-slate-700 flex justify-between">
-            {attraction.name}{" "}
+            {name}{" "}
             <div className="btn-group">
               <button className="btn btn-active btn-xs normal-case">
-                <Link href={`/attractions/edit/${attraction.id}`}>
+                <Link href={`/attractions/edit/${id}`}>
                   <span>Edit Attraction</span>
                 </Link>
               </button>
               <button className="btn btn-xs normal-case">
-                <a href="#" onClick={() => handleDelete(attraction.id)}>
+                <a href="#" onClick={() => handleDelete(id)}>
                   <span>Delete</span>
                 </a>
               </button>
               <Link
                 className="btn btn-xs btn-primary normal-case"
-                href={`/attractions/${attraction.slug}`}
+                href={`/attractions/${slug}`}
               >
                 Details
               </Link>
             </div>
           </h4>
-          <p className="overflow-hidden">{attraction.introduction}</p>
+          <p className="overflow-hidden">{introduction}</p>
         </div>
       </div>
     </div>

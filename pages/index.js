@@ -46,6 +46,7 @@ export async function getStaticProps() {
     const res = await fetch(
       `${API_URL}/attractions?_sort=date:DESC&_limit=${PER_PAGE}`
     );
+
     // const res2 = await fetch(
     //   `https://www.travel.taipei/open-api/en/Attractions/All`,
     //   {
@@ -56,16 +57,15 @@ export async function getStaticProps() {
     //   }
     // );
     // taipei = await res2.json();
-    // console.log("這裡", res);
+
     response = await res.json();
-    console.log("這裡", response);
   } catch (err) {
     console.error(err);
   }
   return {
     // Make sure that you don't pass any sensitive information
     // that shouldn't be available on the client in props.
-    props: { attractions: response.data },
+    props: { attractions: response.data || [] },
     revalidate: 1, // revalidate every 1 sec change
   };
 }
