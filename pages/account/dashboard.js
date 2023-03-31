@@ -5,9 +5,8 @@ import ListLayout from "@/components/ListLayout";
 import DashboardAttraction from "@/components/DashboardAttraction";
 import { API_URL } from "@/config/index";
 
-export default function DashboardPage({ attractions, token }) {
+export default function DashboardPage({ attractions = [], token }) {
   const router = useRouter();
-
   const deleteAttraction = async (id) => {
     if (confirm("Are you sure?")) {
       const res = await fetch(`${API_URL}/attractions/${id}`, {
@@ -52,7 +51,6 @@ DashboardPage.getLayout = function getLayout(page) {
 };
 export async function getServerSideProps({ req }) {
   const { token } = parseCookies(req);
-
   const res = await fetch(`${API_URL}/attractions/me`, {
     method: "GET",
     headers: {
@@ -60,10 +58,10 @@ export async function getServerSideProps({ req }) {
     },
   });
 
-  const attractions = await res.json();
+  const response = await res.json();
   return {
     props: {
-      attractions,
+      attractions: response.data || [],
       token,
     },
   };

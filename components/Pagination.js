@@ -3,7 +3,6 @@ import { PER_PAGE } from "@/config/index";
 
 export default function Pagination({ page, total }) {
   const lastPage = Math.ceil(total / PER_PAGE);
-  console.log(lastPage, page);
   return (
     <div className="flex justify-center">
       <div class="btn-group">

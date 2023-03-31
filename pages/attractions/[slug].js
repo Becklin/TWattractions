@@ -77,16 +77,31 @@ export default function AttractionPage({ attraction }) {
 //  getServerSideProps is similar to getStaticProps, but the difference is that
 //  getServerSideProps is run on every request instead of on build time.
 export async function getServerSideProps({ params: { slug } }) {
-  const res = await fetch(`${API_URL}/attractions?slug=${slug}`);
-  const attractions = await res.json();
-  if (!attractions) {
+  // const res = await fetch(`${API_URL}/attractions?slug=${slug}`);// expect to get the correct result but in no avail
+  const res = await fetch(`${API_URL}/attractions/slug/${slug}`); // expect to get the correct result but in no avail
+
+  const response = await res.json();
+  if (!response.data) {
     return {
       notFound: true,
     };
   }
+
   return {
     props: {
-      attraction: attractions[0],
+      attraction: response.data,
     },
   };
+  // const res = await fetch(`${API_URL}/attractions?slug=${slug}`);
+  // const response = await res.json();
+  // if (!response.data) {
+  //   return {
+  //     notFound: true,
+  //   };
+  // }
+  // return {
+  //   props: {
+  //     attraction: response.data[0],
+  //   },
+  // };
 }

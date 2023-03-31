@@ -31,9 +31,9 @@ export async function getServerSideProps({ query: { keyword } }) {
   });
 
   const res = await fetch(`${API_URL}/attractions?${query}`);
-  const attractions = await res.json();
+  const response = await res.json();
   return {
-    props: { attractions },
+    props: { attractions: response.data },
   };
 }
 

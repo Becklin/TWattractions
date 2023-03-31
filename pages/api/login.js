@@ -15,7 +15,6 @@ export default async (req, res) => {
         password,
       }),
     });
-
     const data = await StrapiRes.json();
     if (StrapiRes.ok) {
       // Set Cookie

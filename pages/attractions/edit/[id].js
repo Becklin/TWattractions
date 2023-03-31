@@ -36,7 +36,9 @@ export default function EditAttractions({ attraction, token }) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify({
+        data: values,
+      }),
     });
 
     if (!res.ok) {
@@ -161,9 +163,9 @@ export async function getServerSideProps({ params: { id }, req }) {
   const { token } = parseCookies(req);
 
   const res = await fetch(`${API_URL}/attractions/${id}`);
-  const attraction = await res.json();
+  const response = await res.json();
 
   return {
-    props: { attraction, token },
+    props: { attraction: response.data, token },
   };
 }

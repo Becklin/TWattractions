@@ -32,7 +32,9 @@ export default function AddAttractions({ token }) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify({
+        data: values,
+      }),
     });
 
     if (!res.ok) {

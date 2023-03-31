@@ -5,7 +5,6 @@ import { Montserrat } from "next/font/google";
 const newMontserrat = Montserrat({ subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }) {
-  console.log(Component);
   const getLayout = Component.getLayout || ((page) => page);
   return (
     <AuthProvider>

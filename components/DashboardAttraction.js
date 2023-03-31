@@ -1,16 +1,11 @@
 import Link from "next/link";
 import Image from "next/Image";
 
-import { FaPencilAlt, FaTimes } from "react-icons/fa";
-
 export default function DashboardAttraction({ attraction, handleDelete }) {
   return (
     <div>
       <div className="card lg:card-side lg:h-28 bg-white shadow-lg my-4">
         <figure className="block w-40 relative shrink-0">
-          {/* {attraction.images && attraction.images.length > 0 && (
-            <Image alt={attraction.name} src={attraction.images[0].src} fill />
-          )} */}
           <Image
             alt={attraction.name}
             src={
@@ -44,7 +39,6 @@ export default function DashboardAttraction({ attraction, handleDelete }) {
             </div>
           </h4>
           <p className="overflow-hidden">{attraction.introduction}</p>
-          {/* <div className="card-actions justify-end"></div> */}
         </div>
       </div>
     </div>

@@ -9,7 +9,11 @@ export default function HomePage({ attractions }) {
     <>
       {!attractions && <h3>No Attraction to show</h3>}
       {attractions.map((attraction) => {
-        return <AttractionItem key={attraction.id} attraction={attraction} />;
+        const newAttr = {
+          ...attraction.attributes,
+          id: attraction.id,
+        };
+        return <AttractionItem key={attraction.id} attraction={newAttr} />;
       })}
       {attractions.length > 0 && (
         <div>
@@ -36,7 +40,7 @@ HomePage.getLayout = function getLayout(page) {
 };
 
 export async function getStaticProps() {
-  let attractions = [];
+  let response = [];
   // let taipei = [];
   try {
     const res = await fetch(
@@ -52,14 +56,16 @@ export async function getStaticProps() {
     //   }
     // );
     // taipei = await res2.json();
-    attractions = await res.json();
+    // console.log("這裡", res);
+    response = await res.json();
+    console.log("這裡", response);
   } catch (err) {
     console.error(err);
   }
   return {
     // Make sure that you don't pass any sensitive information
     // that shouldn't be available on the client in props.
-    props: { attractions },
+    props: { attractions: response.data },
     revalidate: 1, // revalidate every 1 sec change
   };
 }
