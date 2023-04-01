@@ -10,8 +10,8 @@ export default function DashboardAttraction({ attributes, id, handleDelete }) {
           <Image
             alt={name}
             src={
-              image && image.url
-                ? image.formats.thumbnail.url
+              image && image.data
+                ? image.data.attributes.formats.thumbnail.url
                 : "/images/default_image.svg"
             }
             fill

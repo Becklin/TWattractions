@@ -8,7 +8,6 @@ export default function HomePage({ attractions }) {
   return (
     <>
       {!attractions && <h3>No Attraction to show</h3>}
-      {API_URL} {NEXT_URL}
       {attractions.map((attraction) => {
         const newAttr = {
           ...attraction.attributes,
@@ -45,7 +44,7 @@ export async function getStaticProps() {
   // let taipei = [];
   try {
     const res = await fetch(
-      `${API_URL}/attractions?_sort=date:DESC&_limit=${PER_PAGE}`
+      `${API_URL}/attractions?populate=*&_sort=date:DESC&_limit=${PER_PAGE}`
     );
 
     // const res2 = await fetch(

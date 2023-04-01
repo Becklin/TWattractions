@@ -12,17 +12,21 @@ import Modal from "@/components/Modal";
 import ImageUpload from "@/components/ImageUpload";
 import { API_URL } from "@/config/index";
 
-export default function EditAttractions({ attraction, token }) {
+export default function EditAttractions({
+  attraction: { id, attributes },
+  token,
+}) {
   const [values, setValues] = useState({
-    name: attraction.name,
-    location: attraction.location,
-    address: attraction.address,
-    date: attraction.date,
-    description: attraction.description,
+    name: attributes.name,
+    location: attributes.location,
+    address: attributes.address,
+    date: attributes.createdAt,
+    introduction: attributes.introduction,
   });
   const [imagePreview, setImagePreview] = useState(
-    // attraction.image ? attraction.image.formats.thumbnail.url : null
-    attraction.image ? attraction.image.formats.thumbnail.url : null
+    attributes.image && attributes.image.data
+      ? attributes.image.data.attributes.formats.thumbnail.url
+      : null
   );
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
@@ -30,7 +34,7 @@ export default function EditAttractions({ attraction, token }) {
     e.preventDefault();
     const hasEmptyField = Object.values(values).some((val) => val === "");
     if (hasEmptyField) toast.error("please fill in all fields");
-    const res = await fetch(`${API_URL}/attractions/${attraction.id}`, {
+    const res = await fetch(`${API_URL}/attractions/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -48,8 +52,12 @@ export default function EditAttractions({ attraction, token }) {
       }
       toast.error("something went wrong");
     } else {
-      const atr = await res.json();
-      router.push(`/attractions/${atr.slug}`);
+      const {
+        data: {
+          attributes: { slug },
+        },
+      } = await res.json();
+      router.push(`/attractions/${slug}`);
     }
   };
   const handleInputChange = (e) => {
@@ -57,9 +65,13 @@ export default function EditAttractions({ attraction, token }) {
     setValues({ ...values, [name]: value });
   };
   const uploadImage = async (e) => {
-    const res = await fetch(`${API_URL}/attractions/${attraction.id}`);
-    const data = await res.json();
-    setImagePreview(data.image.formats.thumbnail.url);
+    const res = await fetch(`${API_URL}/attractions/${id}?populate=*`);
+    const {
+      data: {
+        attributes: { image },
+      },
+    } = await res.json();
+    setImagePreview(image.data.attributes.formats.thumbnail.url);
     setShowModal(false);
   };
 
@@ -133,7 +145,11 @@ export default function EditAttractions({ attraction, token }) {
             className="textarea textarea-bordered"
             placeholder="introduction"
           ></textarea>
-          <input type="submit" className="btn mt-8" value="Update Attraction" />
+          <input
+            type="submit"
+            className="btn mt-8 normal-case"
+            value="Update Attraction"
+          />
         </form>
         <div className="z-10 relative">
           {imagePreview ? (
@@ -141,17 +157,16 @@ export default function EditAttractions({ attraction, token }) {
               <Image src={imagePreview} width="200" height="170" />
             </div>
           ) : (
-            <div>No Image Uploaded</div>
+            <div className="my-4 normal-case">No Image Uploaded</div>
           )}
-          <button className="btn " onClick={() => setShowModal(true)}>
+          <button
+            className="btn normal-case"
+            onClick={() => setShowModal(true)}
+          >
             Set Image
           </button>
           <Modal show={showModal} onClose={() => setShowModal(false)}>
-            <ImageUpload
-              atrId={attraction.id}
-              imageUploaded={uploadImage}
-              token={token}
-            />
+            <ImageUpload atrId={id} imageUploaded={uploadImage} token={token} />
           </Modal>
         </div>
       </div>
@@ -162,7 +177,7 @@ export default function EditAttractions({ attraction, token }) {
 export async function getServerSideProps({ params: { id }, req }) {
   const { token } = parseCookies(req);
 
-  const res = await fetch(`${API_URL}/attractions/${id}`);
+  const res = await fetch(`${API_URL}/attractions/${id}?populate=*`);
   const response = await res.json();
 
   return {

@@ -7,7 +7,7 @@ export default function ImageUpload({ atrId, imageUploaded, token }) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("files", image);
-    formData.append("ref", "attractions");
+    formData.append("ref", "api::attraction.attraction");
     formData.append("refId", atrId);
     formData.append("field", "image");
     const res = await fetch(`${API_URL}/upload`, {

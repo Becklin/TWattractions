@@ -11,7 +11,9 @@ export default function SearchPage({ attractions }) {
   return (
     <>
       <Link href="/">Back</Link>
-      <h1>Search Results for {router.query.keyword}</h1>
+      <h1 className="text-neutral-content">
+        Search Results for {router.query.keyword}
+      </h1>
       {attractions.length === 0 && <h3>No Attractions to show</h3>}
       {attractions.map((attraction) => {
         const newAttr = {
@@ -40,9 +42,11 @@ export async function getServerSideProps({ query: { keyword } }) {
         name: {
           $eq: keyword,
         },
+        introduction: {
+          $eq: keyword,
+        },
       },
       populate: "*",
-      fields: ["name"],
       publicationState: "live",
       locale: ["en"],
     },

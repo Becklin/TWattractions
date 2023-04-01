@@ -9,8 +9,8 @@ export default function AttractionItem({ attraction }) {
           <Image
             alt={attraction.name}
             src={
-              attraction.image && attraction.image.url
-                ? attraction.image.formats.thumbnail.url
+              attraction.image && attraction.image.data
+                ? attraction.image.data.attributes.formats.thumbnail.url
                 : "/images/default_image.svg"
             }
             fill

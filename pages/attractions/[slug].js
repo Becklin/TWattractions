@@ -49,8 +49,8 @@ export default function AttractionPage({
             <Image
               priority
               src={
-                image && image.formats.medium.url
-                  ? image.formats.medium.url
+                image && image.data
+                  ? image.data.attributes.formats.medium.url
                   : "/images/default_image.svg"
               }
               width={760}
@@ -81,10 +81,8 @@ export default function AttractionPage({
 //  getServerSideProps is similar to getStaticProps, but the difference is that
 //  getServerSideProps is run on every request instead of on build time.
 export async function getServerSideProps({ params: { slug } }) {
-  // const res = await fetch(`${API_URL}/attractions?slug=${slug}`);// expect to get the correct result but in no avail
-  //const res = await fetch(`${API_URL}/attractions/slug/${slug}`); // expect to get the correct result but in no avail
   const res = await fetch(
-    `${API_URL}/attractions?filters\[Slug\][$eq]=${slug}`
+    `${API_URL}/attractions?populate=*&filters\[Slug\][$eq]=${slug}`
   );
 
   const response = await res.json();
@@ -94,7 +92,6 @@ export async function getServerSideProps({ params: { slug } }) {
     };
   }
 
-  console.log(response);
   return {
     props: {
       attraction: response.data[0],

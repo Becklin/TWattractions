@@ -39,7 +39,7 @@ export async function getServerSideProps({ query: { page = 1 } }) {
   const totalRes = await fetch(`${API_URL}/attractions/count`);
   const total = await totalRes.json();
   const atrRes = await fetch(
-    `${API_URL}/attractions?_sort=date:ASC&_limit=${PER_PAGE}&_start=${start}`
+    `${API_URL}/attractions?populate=*&_sort=date:DESC&_limit=${PER_PAGE}&_start=${start}`
   );
   const response = await atrRes.json();
 
