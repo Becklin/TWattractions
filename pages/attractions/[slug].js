@@ -6,7 +6,10 @@ import { API_URL } from "@/config/index";
 import Layout from "@/components/Layout";
 import Link from "next/link";
 
-export default function AttractionPage({ attraction: { id, attributes } }) {
+export default function AttractionPage({
+  attraction: { id, attributes },
+  all,
+}) {
   const router = useRouter();
   const { name, address, location, introduction, author, createdAt, image } =
     attributes;
@@ -25,6 +28,7 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
   };
   return (
     <Layout>
+      {all}
       <div className="mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto">
         <ToastContainer />
         <h2 className="flex items-center justify-between">
@@ -82,6 +86,7 @@ export async function getServerSideProps({ params: { slug } }) {
   const res = await fetch(
     `${API_URL}/attractions?filters\[Slug\][$eq]=${slug}`
   );
+
   const response = await res.json();
   if (!response.data) {
     return {
@@ -89,9 +94,11 @@ export async function getServerSideProps({ params: { slug } }) {
     };
   }
 
+  console.log(response);
   return {
     props: {
       attraction: response.data[0],
+      all: JSON.stringify(res),
     },
   };
 }
