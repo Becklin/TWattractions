@@ -2,6 +2,9 @@ import "normalize.css/normalize.css";
 import "../styles/globals.scss";
 import { AuthProvider } from "@/context/AuthContext";
 import { Montserrat } from "next/font/google";
+// import { interceptJsonFromVercelBuild } from "@/helpers/index";
+// interceptJsonFromVercelBuild();
+
 const newMontserrat = Montserrat({ subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }) {

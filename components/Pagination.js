@@ -16,7 +16,7 @@ export default function Pagination({ page, total }) {
         >
           Prev
         </Link>
-        <button class="btn btn-sm">Page {page}</button>
+        <button className="btn btn-sm">Page {page}</button>
         <Link
           className={
             page == lastPage
