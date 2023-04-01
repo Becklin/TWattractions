@@ -44,7 +44,7 @@ export async function getStaticProps() {
   // let taipei = [];
   try {
     const res = await fetch(
-      `${API_URL}/attractions?populate=*&_sort=date:DESC&_limit=${PER_PAGE}`
+      `${API_URL}/attractions?populate=*&sort[0]=createdAt:desc&pagination[pageSize]=${PER_PAGE}`
     );
 
     // const res2 = await fetch(

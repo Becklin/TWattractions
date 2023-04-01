@@ -6,10 +6,7 @@ import { API_URL } from "@/config/index";
 import Layout from "@/components/Layout";
 import Link from "next/link";
 
-export default function AttractionPage({
-  attraction: { id, attributes },
-  all,
-}) {
+export default function AttractionPage({ attraction: { id, attributes } }) {
   const router = useRouter();
   const { name, address, location, introduction, author, createdAt, image } =
     attributes;
@@ -28,7 +25,7 @@ export default function AttractionPage({
   };
   return (
     <Layout>
-      {all}
+      {/* <div className="w-full h-full bg-[#e9e9e7]"> */}
       <div className="mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto">
         <ToastContainer />
         <h2 className="flex items-center justify-between">
@@ -44,7 +41,7 @@ export default function AttractionPage({
             </button>
           </div>
         </h2>
-        <div className="flex gap-6 mb-6 w-full">
+        <section className="flex gap-6 mb-6 w-full">
           <section className="flex-1">
             <Image
               priority
@@ -65,11 +62,12 @@ export default function AttractionPage({
           <section className="flex-1">
             <p>{introduction}</p>
           </section>
-        </div>
-        <div className="flex w-full justify-between items-center">
+        </section>
+        <section className="flex w-full justify-between items-center">
           <Link href="/attractions">Back</Link>
-        </div>
+        </section>
       </div>
+      {/* </div> */}
     </Layout>
   );
 }
@@ -81,10 +79,10 @@ export default function AttractionPage({
 //  getServerSideProps is similar to getStaticProps, but the difference is that
 //  getServerSideProps is run on every request instead of on build time.
 export async function getServerSideProps({ params: { slug } }) {
-  const res = await fetch(
-    `${API_URL}/attractions?populate=*&filters\[Slug\][$eq]=${slug}`
-  );
-
+  // const res = await fetch(
+  //   `${API_URL}/attractions?populate=*&filters\[Slug\][$eq]=${slug}`
+  // );
+  const res = await fetch(`${API_URL}/attractions?populate=*&slug=${slug}`);
   const response = await res.json();
   if (!response.data) {
     return {
@@ -95,7 +93,6 @@ export async function getServerSideProps({ params: { slug } }) {
   return {
     props: {
       attraction: response.data[0],
-      all: JSON.stringify(res),
     },
   };
 }
