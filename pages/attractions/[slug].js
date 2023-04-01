@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { API_URL } from "@/config/index";
 import Layout from "@/components/Layout";
 import Link from "next/link";
+import qs from "qs";
 
 export default function AttractionPage({ attraction: { id, attributes } }) {
   const router = useRouter();
@@ -79,19 +80,33 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
 //  getServerSideProps is similar to getStaticProps, but the difference is that
 //  getServerSideProps is run on every request instead of on build time.
 export async function getServerSideProps({ params: { slug } }) {
-  const finalUrl = `${API_URL}/attractions?populate=*&filters\[Slug\][$eq]=${slug}`;
-  console.log("finalUrl", finalUrl);
-  const res = await fetch(
-    `${API_URL}/attractions?populate=*&filters\[Slug\][$eq]=${slug}`
-  );
+  // the following code trigger 404 status in vercel host becasue of nextjs build, need investigation
+  // const res = await fetch(
+  //   `${API_URL}/attractions?populate=*&filters\[Slug\][$eq]=${slug}`
+  // );
   // const res = await fetch(`${API_URL}/attractions?populate=*&slug=${slug}`);
+  const query = qs.stringify(
+    {
+      filters: {
+        slug: {
+          $eq: slug,
+        },
+      },
+      populate: "*",
+      publicationState: "live",
+      locale: ["en"],
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  const res = await fetch(`${API_URL}/attractions?${query}`);
   const response = await res.json();
   if (!response.data) {
     return {
       notFound: true,
     };
   }
-
   return {
     props: {
       attraction: response.data[0],
