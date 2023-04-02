@@ -38,9 +38,9 @@ export default function LoginPage() {
           className="z-10 relative form-control w-full max-w-lg"
           onSubmit={handleSubmit}
         >
-          <h2>
+          <h1>
             <FaUser className="inline" /> Login
-          </h2>
+          </h1>
           <div className="flex justify-between gap-4">
             <div className="flex-1">
               <TwInput

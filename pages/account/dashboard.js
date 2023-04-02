@@ -32,8 +32,8 @@ export default function DashboardPage({ attractions = [], token }) {
     <>
       <div>
         <ToastContainer />
-        <h1>Dashboard</h1>
-        <h3>My Posts</h3>
+        <h1 className="text-neutral-content">Dashboard</h1>
+        <h3 className="text-neutral-content">My Posts</h3>
         {attractions.map(({ id, attributes }) => (
           <DashboardAttraction
             key={id}
@@ -55,7 +55,7 @@ DashboardPage.getLayout = function getLayout(page) {
 };
 export async function getServerSideProps({ req }) {
   const { token } = parseCookies(req);
-  const res = await fetch(`${API_URL}/attractions/me`, {
+  const res = await fetch(`${API_URL}/attractions/me?populate=*`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,

@@ -10,7 +10,7 @@ export default function TwInput({
   return (
     <div>
       <label className="label" htmlFor={name}>
-        <span className="label-text text-white">{`${name
+        <span className="label-text">{`${name
           .charAt(0)
           .toUpperCase()}${name.slice(1)}`}</span>
       </label>
@@ -19,7 +19,7 @@ export default function TwInput({
         id={name}
         name={name}
         value={value}
-        className="input input-bordered w-full max-w-xs"
+        className="input input-bordered w-full"
         onChange={handleInputChange}
         placeholder={placeholder}
       />

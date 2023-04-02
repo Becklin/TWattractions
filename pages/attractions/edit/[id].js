@@ -98,18 +98,18 @@ export default function EditAttractions({
             <div className="flex-1">
               <TwInput
                 type="text"
-                name="name"
-                value={values.name}
-                placeholder="Name"
+                name="address"
+                value={values.address}
+                placeholder="Address"
                 handleInputChange={handleInputChange}
               />
             </div>
             <div className="flex-1">
               <TwInput
                 type="text"
-                name="address"
-                value={values.address}
-                placeholder="Address"
+                name="name"
+                value={values.name}
+                placeholder="Name"
                 handleInputChange={handleInputChange}
               />
             </div>
@@ -124,18 +124,9 @@ export default function EditAttractions({
                 handleInputChange={handleInputChange}
               />
             </div>
-            <div className="flex-1">
-              <TwInput
-                type="date"
-                name="date"
-                value={moment(values.date).format("YYYY-MM-DD")}
-                placeholder="select date"
-                handleInputChange={handleInputChange}
-              />
-            </div>
           </div>
           <label className="label" htmlFor="introduction">
-            <span className="label-text text-white">Introduction</span>
+            <span className="label-text">Introduction</span>
           </label>
           <textarea
             id="introduction"

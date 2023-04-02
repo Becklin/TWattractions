@@ -17,7 +17,7 @@ export default function AddAttractions({ token }) {
     name: "",
     location: "",
     address: "",
-    date: "",
+    date: new Date(),
     introduction: "",
   });
 
@@ -79,9 +79,9 @@ export default function AddAttractions({ token }) {
             <div className="flex-1">
               <TwInput
                 type="text"
-                name="address"
-                value={values.address}
-                placeholder="Address"
+                name="location"
+                value={values.location}
+                placeholder="location"
                 handleInputChange={handleInputChange}
               />
             </div>
@@ -90,18 +90,9 @@ export default function AddAttractions({ token }) {
             <div className="flex-1">
               <TwInput
                 type="text"
-                name="location"
-                value={values.location}
-                placeholder="location"
-                handleInputChange={handleInputChange}
-              />
-            </div>
-            <div className="flex-1">
-              <TwInput
-                type="date"
-                name="date"
-                value={values.date}
-                placeholder="select date"
+                name="address"
+                value={values.address}
+                placeholder="Address"
                 handleInputChange={handleInputChange}
               />
             </div>

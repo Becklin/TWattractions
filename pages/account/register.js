@@ -46,7 +46,7 @@ export default function RegisterPage() {
             className="z-[1] relative form-control w-full max-w-lg"
             onSubmit={handleSubmit}
           >
-            <h2>Register</h2>
+            <h1>Register</h1>
             <div className="flex justify-between gap-4">
               <div className="flex-1">
                 <TwInput

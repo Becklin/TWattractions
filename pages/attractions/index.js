@@ -47,16 +47,3 @@ export async function getServerSideProps({ query: { page = 1 } }) {
     props: { attractions: response.data, page: +page, total },
   };
 }
-// export async function getStaticProps() {
-//   let attractions = [];
-//   try {
-//     const res = await fetch(`${API_URL}/attractions?_sort=date:DESC`);
-//     attractions = await res.json();
-//   } catch (err) {
-//     console.error(err);
-//   }
-//   return {
-//     props: { attractions },
-//     revalidate: 1, // revalidate every 1 sec change
-//   };
-// }

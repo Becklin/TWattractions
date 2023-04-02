@@ -26,7 +26,7 @@ export default function ImageUpload({ atrId, imageUploaded, token }) {
   };
   return (
     <div>
-      <h1>Upload Attraction Image</h1>
+      <h2>Upload Attraction Image</h2>
       <form onSubmit={handleSubmit} className="form-control my-4">
         <div className="form-control w-full max-w-xs">
           <label className="label">

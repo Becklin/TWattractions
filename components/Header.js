@@ -12,7 +12,7 @@ export default function Header() {
     <div className="z-10 fixed top-0 navbar bg-slate-800">
       <div className="flex-1">
         <Link
-          className="btn btn-ghost normal-case text-xl text-slate-100"
+          className="btn btn-ghost text-xl text-slate-100 uppercase tracking-widest"
           href="/"
         >
           Taiwan Attractions
@@ -30,15 +30,23 @@ export default function Header() {
         )}
         <div className="dropdown dropdown-end">
           <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <Image
-                priority
-                src="/images/profile.svg"
-                height={28}
-                width={28}
-                alt="profile"
-              />
-            </div>
+            {user ? (
+              <div className="border border-slate-50 border-4">
+                <span className="text-neutral-content uppercase text-lg leading-7">
+                  {user.username.charAt(0)}
+                </span>
+              </div>
+            ) : (
+              <div className="w-10 rounded-full">
+                <Image
+                  priority
+                  src="/images/profile.svg"
+                  height={28}
+                  width={28}
+                  alt="profile"
+                />
+              </div>
+            )}
           </label>
           <ul
             tabIndex="0"
