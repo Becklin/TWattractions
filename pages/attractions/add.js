@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 import { parseCookies } from "@/helpers/index";
 import Link from "next/link";
@@ -10,8 +11,10 @@ import Layout from "@/components/Layout";
 import TwInput from "@/components/TwInput";
 
 import { API_URL } from "@/config/index";
+import AuthContext from "@/context/AuthContext";
 
 export default function AddAttractions({ token }) {
+  const { user } = useContext(AuthContext);
   const router = useRouter();
   const [values, setValues] = useState({
     name: "",
@@ -19,6 +22,7 @@ export default function AddAttractions({ token }) {
     address: "",
     date: new Date(),
     introduction: "",
+    author: user.username,
   });
 
   const handleSubmit = async (e) => {
@@ -30,14 +34,16 @@ export default function AddAttractions({ token }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: "",
       },
       body: JSON.stringify({
         data: values,
       }),
     });
+    console.log("res", res);
 
     if (!res.ok) {
+      console.log("res", res);
       toast.error("something went wrong");
     } else {
       const atr = await res.json();

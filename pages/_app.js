@@ -2,6 +2,7 @@ import "normalize.css/normalize.css";
 import "../styles/globals.scss";
 import { AuthProvider } from "@/context/AuthContext";
 import { Montserrat } from "next/font/google";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 
 const newMontserrat = Montserrat({ subsets: ["latin"] });
 

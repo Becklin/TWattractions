@@ -6,10 +6,12 @@ import { API_URL } from "@/config/index";
 import Layout from "@/components/Layout";
 import Link from "next/link";
 import qs from "qs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 export default function AttractionPage({ attraction: { id, attributes } }) {
   const router = useRouter();
-  const { name, address, location, introduction, author, createdAt, image } =
+  const { author, name, address, location, introduction, createdAt, image } =
     attributes;
   const deleteAttraction = async (e) => {
     if (confirm("Are you sure?")) {
@@ -26,49 +28,55 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
   };
   return (
     <Layout>
-      {/* <div className="w-full h-full bg-[#e9e9e7]"> */}
-      <div className="mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto">
-        <ToastContainer />
-        <h2 className="flex items-center justify-between">
-          {name}{" "}
-          <div className="btn-group ">
-            <button className="btn btn-active btn-sm normal-case">
-              <Link href={`/attractions/edit/${id}`}>Edit Attraction</Link>
-            </button>
-            <button className="btn btn-sm normal-case">
-              <a href="#" className="btn-third" onClick={deleteAttraction}>
-                Delete Attraction
-              </a>
-            </button>
-          </div>
-        </h2>
-        <section className="flex gap-6 mb-6 w-full">
-          <section className="flex-1">
-            <Image
-              priority
-              src={
-                image && image.data
-                  ? image.data.attributes.formats.medium.url
-                  : "/images/default_image.svg"
-              }
-              width={760}
-              height={400}
-            />
-            <span className="text-sm text-slate-500 inline-block my-3">
-              {new Date(createdAt).toLocaleDateString("en-ca")} {address} at{" "}
-              {location}
-              {/* official site */}
+      <div className="fixed w-full h-screen bg-[#e6e6e6]">
+        <div className="artboard-demo phone-6 mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto box-content p-4">
+          <ToastContainer />
+          <h2 className="w-full flex items-baseline justify-between">
+            {name}
+            <span className="text-sm text-slate-300">
+              {new Date(createdAt).toLocaleDateString("en-ca")}
             </span>
+          </h2>
+          <section className="flex gap-6 mb-6 w-full">
+            <section className="flex-1">
+              <Image
+                priority
+                src={
+                  image && image.data
+                    ? image.data.attributes.formats.medium.url
+                    : "/images/default_image.svg"
+                }
+                width={760}
+                height={400}
+              />
+              <div className="btn-group mt-4">
+                <button className="btn btn-active btn-xs normal-case">
+                  <Link href={`/attractions/edit/${id}`}>Edit Attraction</Link>
+                </button>
+                <button className="btn btn-xs normal-case">
+                  <a href="#" className="btn-third" onClick={deleteAttraction}>
+                    Delete Attraction
+                  </a>
+                </button>
+                <button className="btn btn-xs normal-case">
+                  <Link href="/attractions">Back</Link>
+                </button>
+              </div>
+              <div className="my-4">
+                <FontAwesomeIcon icon={faLocationDot} size="md" />
+                <span className="ml-2">
+                  {address} at {location}
+                </span>
+              </div>
+              <div className="text-sm text-slate-500">Posted by {author}</div>
+            </section>
+            <section className="flex-1">
+              <p>{introduction}</p>
+            </section>
           </section>
-          <section className="flex-1">
-            <p>{introduction}</p>
-          </section>
-        </section>
-        <section className="flex w-full justify-between items-center">
-          <Link href="/attractions">Back</Link>
-        </section>
+          <section className="flex w-full justify-between items-center"></section>
+        </div>
       </div>
-      {/* </div> */}
     </Layout>
   );
 }

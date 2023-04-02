@@ -30,23 +30,15 @@ export default function Header() {
         )}
         <div className="dropdown dropdown-end">
           <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-            {user ? (
-              <div className="border border-slate-50 border-4">
-                <span className="text-neutral-content uppercase text-lg leading-7">
-                  {user.username.charAt(0)}
-                </span>
-              </div>
-            ) : (
-              <div className="w-10 rounded-full">
-                <Image
-                  priority
-                  src="/images/profile.svg"
-                  height={28}
-                  width={28}
-                  alt="profile"
-                />
-              </div>
-            )}
+            <div className="w-10 rounded-full ">
+              <Image
+                priority
+                src="/images/profile.svg"
+                height={28}
+                width={28}
+                alt="profile"
+              />
+            </div>
           </label>
           <ul
             tabIndex="0"
