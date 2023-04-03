@@ -40,10 +40,7 @@ export async function getServerSideProps({ query: { keyword } }) {
       sort: ["name:asc"],
       filters: {
         name: {
-          $eq: keyword,
-        },
-        introduction: {
-          $eq: keyword,
+          $containsi: keyword,
         },
       },
       populate: "*",

@@ -12,7 +12,12 @@ export default function Search() {
     router.push(`/attractions/search?keyword=${keyword}`);
     setKeyword("");
   };
-
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      router.push(`/attractions/search?keyword=${keyword}`);
+      setKeyword("");
+    }
+  };
   return (
     <div className="form-control">
       <div className="input-group">
@@ -21,6 +26,7 @@ export default function Search() {
           type="text"
           placeholder="Search attractions"
           className="input input-bordered text-slate-700"
+          onKeyPress={handleKeyPress}
         />
         <button onClick={handleSubmit} className="btn btn-square btn-info">
           <svg

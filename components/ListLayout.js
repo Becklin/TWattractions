@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function ListLayout({ children }) {
   return (
     <>
-      <div className="absolute top-0 w-full h-full bg-black">
+      <div className="fixed top-0 w-full h-full bg-black">
         <Image
           priority
           alt="background image"
