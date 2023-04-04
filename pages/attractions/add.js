@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import { parseCookies } from "@/helpers/index";
@@ -24,23 +24,27 @@ export default function AddAttractions({ token }) {
     introduction: "",
     author: user.username,
   });
-
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const hasEmptyField = Object.values(values).some((val) => val === "");
     if (hasEmptyField) toast.error("please fill in all fields");
 
+    const formData = new FormData();
+    console.log(image);
+    formData.append("files.image", image, image.name);
+    console.log("values", values);
+    formData.append("data", JSON.stringify(values));
+
     const res = await fetch(`${API_URL}/attractions/`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "",
+        // "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        data: values,
-      }),
+      body: formData,
     });
-    console.log("res", res);
 
     if (!res.ok) {
       console.log("res", res);
@@ -55,6 +59,19 @@ export default function AddAttractions({ token }) {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  useEffect(() => {
+    if (!image) {
+      setImagePreview(null);
+      return;
+    }
+    const objectUrl = URL.createObjectURL(image);
+    setImagePreview(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [image]);
 
   return (
     <Layout title="Add New Attraction">
@@ -114,8 +131,27 @@ export default function AddAttractions({ token }) {
             className="textarea textarea-bordered"
             placeholder="introduction"
           ></textarea>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Pick an image</span>
+            </label>
+            <input
+              type="file"
+              name="image"
+              onChange={handleFileChange}
+              className="file-input file-input-bordered w-full max-w-xs"
+            />
+            {imagePreview ? (
+              <div className="my-4 overflow-hidden rounded-4">
+                <Image src={imagePreview} width="200" height="170" />
+              </div>
+            ) : (
+              <div className="my-4 normal-case">No Image Uploaded</div>
+            )}
+          </div>
           <input type="submit" className="btn mt-8" value="Add Attraction" />
         </form>
+        <div className="z-10 relative"></div>
         <Link href="/attractions">Back</Link>
         <div className="divider"></div>
       </div>
