@@ -39,7 +39,10 @@ HomePage.getLayout = function getLayout(page) {
   );
 };
 
+// export async function getStaticProps() {//getServerSideProps
 export async function getStaticProps() {
+  //getServerSideProps
+
   let response = [];
   // let taipei = [];
   try {
