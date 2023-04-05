@@ -16,7 +16,9 @@ export default function Pagination({ page, total }) {
         >
           Prev
         </Link>
-        <button className="btn btn-sm">Page {page}</button>
+        <span className="btn btn-sm" aria-label="delete attraction">
+          Page {page}
+        </span>
         <Link
           className={
             page == lastPage

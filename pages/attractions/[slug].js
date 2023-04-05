@@ -50,15 +50,21 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
                 height={400}
               />
               <div className="btn-group mt-4">
-                <button className="btn btn-active btn-xs normal-case">
+                <button
+                  className="btn btn-active btn-xs normal-case"
+                  aria-label="edit attraction"
+                >
                   <Link href={`/attractions/edit/${id}`}>Edit Attraction</Link>
                 </button>
-                <button className="btn btn-xs normal-case">
+                <button
+                  className="btn btn-xs normal-case"
+                  aria-label="delete attraction"
+                >
                   <a href="#" className="btn-third" onClick={deleteAttraction}>
                     Delete Attraction
                   </a>
                 </button>
-                <button className="btn btn-xs normal-case">
+                <button className="btn btn-xs normal-case" aria-label="back">
                   <Link href="/attractions">Back</Link>
                 </button>
               </div>

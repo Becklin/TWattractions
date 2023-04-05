@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { parseCookies } from "@/helpers/index";
 import { useRouter } from "next/router";
-import moment from "moment";
 import Link from "next/link";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
@@ -153,6 +152,7 @@ export default function EditAttractions({
           <button
             className="btn normal-case"
             onClick={() => setShowModal(true)}
+            aria-label="show image upload modal"
           >
             Set Image
           </button>

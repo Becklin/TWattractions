@@ -21,12 +21,18 @@ export default function DashboardAttraction({ attributes, id, handleDelete }) {
           <h4 className="card-title text-slate-700 flex justify-between">
             {name}{" "}
             <div className="btn-group">
-              <button className="btn btn-active btn-xs normal-case">
+              <button
+                className="btn btn-active btn-xs normal-case"
+                aria-label="edit attraction"
+              >
                 <Link href={`/attractions/edit/${id}`}>
                   <span>Edit Attraction</span>
                 </Link>
               </button>
-              <button className="btn btn-xs normal-case">
+              <button
+                className="btn btn-xs normal-case"
+                aria-label="delete attraction"
+              >
                 <a href="#" onClick={() => handleDelete(id)}>
                   <span>Delete</span>
                 </a>

@@ -28,7 +28,11 @@ export default function Search() {
           className="input input-bordered text-slate-700"
           onKeyPress={handleKeyPress}
         />
-        <button onClick={handleSubmit} className="btn btn-square btn-info">
+        <button
+          onClick={handleSubmit}
+          className="btn btn-square btn-info"
+          aria-label="search attraction"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"

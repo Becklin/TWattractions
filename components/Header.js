@@ -53,7 +53,7 @@ export default function Header() {
             )}
             <li>
               {user ? (
-                <button onClick={() => logout()}>
+                <button onClick={() => logout()} aria-label="log out">
                   <FaSignOutAlt></FaSignOutAlt>logout
                 </button>
               ) : (
