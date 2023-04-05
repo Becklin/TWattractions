@@ -1,12 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { NEXT_URL } from "@/config/index";
+import { ToastContainer, toast } from "react-toastify";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
 
   const router = useRouter();
 
@@ -30,8 +30,7 @@ export const AuthProvider = ({ children }) => {
       setUser(data.user);
       router.push("/account/dashboard");
     } else {
-      setError(data.message);
-      setError(null);
+      toast.error(data.message);
     }
   };
 
@@ -53,8 +52,7 @@ export const AuthProvider = ({ children }) => {
       setUser(data.user);
       router.push("/account/dashboard");
     } else {
-      setError(data.message);
-      setError(null);
+      toast.error(data.message);
     }
   };
   // Logout user
@@ -71,21 +69,25 @@ export const AuthProvider = ({ children }) => {
 
   // Check if user is logged in
   const checkUserLoggedIn = async () => {
+    console.log("CHECK");
     try {
       const res = await fetch(`${NEXT_URL}/api/user`);
       const data = await res.json();
+      console.log("res", res);
+      console.log("data", data);
+
       if (res.ok) {
         setUser(data.user);
       } else {
         setUser(null);
       }
     } catch (err) {
+      console.log("what", err);
       console.error(err.message);
     }
   };
   return (
-    // pass functions to be used in children component
-    <AuthContext.Provider value={{ user, error, register, login, logout }}>
+    <AuthContext.Provider value={{ user, register, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

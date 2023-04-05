@@ -1,4 +1,3 @@
-// // import cookie from "cookie";
 import { API_URL } from "@/config/index";
 import cookie from "cookie";
 
@@ -28,7 +27,7 @@ export default async (req, res) => {
             path: "/",
           })
         );
-        res.status(200).json({ user: data.user });
+        res.status(200).json({ user: data.user, jjwwtt: data.jwt });
       } else {
         res.status(data.error.status).json({ message: data.error.message });
       }

@@ -3,8 +3,11 @@ import { API_URL } from "@/config/index";
 
 export default async (req, res) => {
   if (req.method === "GET") {
+    console.log("req.header", req.headers.cookie);
     if (!req.headers.cookie) {
-      res.status(403).json({ message: "Not Authorized" });
+      res
+        .status(403)
+        .json({ message: "Not Authorized", head: JSON.stringify(req.headers) });
       return;
     }
 
@@ -18,9 +21,14 @@ export default async (req, res) => {
 
     const user = await strapiRes.json();
     if (strapiRes.ok) {
-      res.status(200).json({ user });
+      res.status(200).json({ user, strapiRes: JSON.stringify(strapiRes) });
     } else {
-      res.status(403).json({ message: "User forbidden" });
+      res.status(403).json({
+        message: "User forbidden",
+        API_URL,
+        user,
+        reqcookie: req.headers.cookie,
+      });
     }
   } else {
     res.setHeader("allow", ["GET"]);
