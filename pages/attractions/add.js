@@ -32,9 +32,7 @@ export default function AddAttractions({ token }) {
     if (hasEmptyField) toast.error("please fill in all fields");
 
     const formData = new FormData();
-    console.log(image);
     formData.append("files.image", image, image.name);
-    console.log("values", values);
     formData.append("data", JSON.stringify(values));
 
     const res = await fetch(`${API_URL}/attractions/`, {
@@ -47,7 +45,6 @@ export default function AddAttractions({ token }) {
     });
 
     if (!res.ok) {
-      console.log("res", res);
       toast.error("something went wrong");
     } else {
       const atr = await res.json();
