@@ -2,17 +2,27 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { API_URL } from "@/config/index";
+import { API_URL, NEXT_URL } from "@/config/index";
+
 import Layout from "@/components/Layout";
 import Link from "next/link";
 import qs from "qs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { NextSeo, ArticleJsonLd } from "next-seo";
 
 export default function AttractionPage({ attraction: { id, attributes } }) {
   const router = useRouter();
-  const { author, name, address, location, introduction, createdAt, image } =
-    attributes;
+  const {
+    author,
+    name,
+    address,
+    location,
+    introduction,
+    createdAt,
+    image,
+    slug,
+  } = attributes;
   const deleteAttraction = async (e) => {
     if (confirm("Are you sure?")) {
       const res = await fetch(`${API_URL}/attractions/${id}`, {
@@ -26,9 +36,46 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
       }
     }
   };
+  //title, keywords, description, children
   return (
-    <Layout>
-      <div className="fixed w-full h-screen bg-[#e6e6e6]">
+    <Layout title={name} keywords={`taiwan travel attractions ${name}`}>
+      <NextSeo
+        title={name}
+        description={introduction}
+        canonical={NEXT_URL + "/attractions/" + slug}
+        openGraph={{
+          type: "article",
+          article: {
+            publishedTime: createdAt,
+            authors: [author],
+          },
+          url: `${NEXT_URL}/attractions/${slug}`,
+          images: {
+            url:
+              image && image.data
+                ? image.data.attributes.formats.medium.url
+                : "/images/default_image.svg",
+            width: 760,
+            height: 400,
+            alt: { name },
+          },
+          site_name: "Taiwan Attractions",
+        }}
+      />
+      <ArticleJsonLd
+        type="BlogPosting"
+        url={NEXT_URL + "/attractions/" + slug}
+        title={name}
+        images={[
+          image && image.data
+            ? image.data.attributes.formats.medium.url
+            : "/images/default_image.svg",
+        ]}
+        datePublished={createdAt}
+        authorName={author}
+        description={introduction}
+      />
+      <div className="fixed w-full h-screen bg-[#e6e6e6] overflow-auto">
         <div className="artboard-demo phone-6 mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto box-content p-4">
           <ToastContainer />
           <h2 className="w-full flex items-baseline justify-between">

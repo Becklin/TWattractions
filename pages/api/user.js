@@ -3,7 +3,6 @@ import { API_URL } from "@/config/index";
 
 export default async (req, res) => {
   if (req.method === "GET") {
-    console.log("req.header", req.headers.cookie);
     if (!req.headers.cookie) {
       res
         .status(403)

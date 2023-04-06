@@ -69,12 +69,9 @@ export const AuthProvider = ({ children }) => {
 
   // Check if user is logged in
   const checkUserLoggedIn = async () => {
-    console.log("CHECK");
     try {
       const res = await fetch(`${NEXT_URL}/api/user`);
       const data = await res.json();
-      console.log("res", res);
-      console.log("data", data);
 
       if (res.ok) {
         setUser(data.user);
@@ -82,7 +79,6 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
       }
     } catch (err) {
-      console.log("what", err);
       console.error(err.message);
     }
   };
