@@ -3,8 +3,6 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_URL, NEXT_URL } from "@/config/index";
-import { MAP_API_KEY } from "@/config/index";
-console.log({ MAP_API_KEY });
 import Layout from "@/components/Layout";
 import Link from "next/link";
 import qs from "qs";
@@ -38,8 +36,6 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
       }
     }
   };
-  console.log(API_URL, NEXT_URL, MAP_API_KEY);
-  //title, keywords, description, children
   return (
     <Layout title={name} keywords={`taiwan travel attractions ${name}`}>
       <NextSeo
