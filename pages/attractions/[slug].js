@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { API_URL, NEXT_URL } from "@/config/index";
+import { API_URL, NEXT_URL, NEXT_GOOGLE_MAP_API_KEY } from "@/config/index";
 
 import Layout from "@/components/Layout";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import qs from "qs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { NextSeo, ArticleJsonLd } from "next-seo";
+import GoogleMap from "@/components/GoogleMap";
 
 export default function AttractionPage({ attraction: { id, attributes } }) {
   const router = useRouter();
@@ -36,6 +37,7 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
       }
     }
   };
+  console.log(API_URL, NEXT_URL, NEXT_GOOGLE_MAP_API_KEY);
   //title, keywords, description, children
   return (
     <Layout title={name} keywords={`taiwan travel attractions ${name}`}>
@@ -121,6 +123,7 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
                   {address} at {location}
                 </span>
               </div>
+              <GoogleMap address={address} />
               <div className="text-sm text-slate-500">Posted by {author}</div>
             </section>
             <section className="flex-1">

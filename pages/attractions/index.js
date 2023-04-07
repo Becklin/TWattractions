@@ -3,7 +3,6 @@ import ListLayout from "@/components/ListLayout";
 import AttractionItem from "@/components/AttractionItem";
 import Pagination from "@/components/Pagination";
 import { API_URL, PER_PAGE } from "@/config/index";
-
 export default function AttractionsPage({ attractions, page, total }) {
   return (
     <>
