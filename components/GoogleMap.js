@@ -1,45 +1,43 @@
 import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 import Geocode from "react-geocode";
-import { ToastContainer, toast } from "react-toastify";
+import Image from "next/image";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MAP_API_KEY } from "@/config/index";
 
-const Marker = ({ text }) => (
-  <div className="marker">
-    <span className="marker__name">{text}</span>
-  </div>
-);
+const Marker = () => <Image src="/images/pin.svg" width={30} height={30} />;
 
 export default function SimpleMap({ address }) {
-  const [lat, setLat] = useState();
-  const [lng, setLng] = useState();
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const defaultProps = {
     center: {
       lat,
       lng,
     },
-    zoom: 12,
+    zoom: 14,
   };
 
   useEffect(() => {
     Geocode.fromAddress(address).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
+        console.log(lat, lng);
         setLat(lat);
         setLng(lng);
-        setViewport({ ...viewport, latitude: lat, longitude: lng });
         setLoading(false);
       },
       (error) => {
-        // console.error(error);
         toast.error(error);
       }
     );
   }, []);
 
   Geocode.setApiKey(MAP_API_KEY);
-
+  if (loading) return false;
   return (
     <div className="w-full h-[350px]">
       <GoogleMapReact
@@ -48,7 +46,7 @@ export default function SimpleMap({ address }) {
         defaultZoom={defaultProps.zoom}
         yesIWantToUseGoogleMapApiInternals
       >
-        <Marker lat={lat} lng={lng} />
+        <Marker lat={defaultProps.center.lat} lng={defaultProps.center.lng} />
       </GoogleMapReact>
     </div>
   );

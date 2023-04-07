@@ -121,7 +121,9 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
                 </span>
               </div>
               <GoogleMap address={address} />
-              <div className="text-sm text-slate-500">Posted by {author}</div>
+              <div className="my-2 text-sm text-slate-500">
+                Posted by {author}
+              </div>
             </section>
             <section className="flex-1">
               <p>{introduction}</p>
