@@ -57,8 +57,8 @@ To deploy the website on Vercel, follow these steps:
 <!-- -->
 
     NEXT_PUBLIC_API_URL=http://your-api-endpoint.com
-    ADMIN_USERNAME=admin
-    ADMIN_PASSWORD=your-admin-password
+    NEXT_PUBLIC_GOOGLE_MAP_API_KEY
+    NEXT_PUBLIC_FRONTEND_URL
 
 3.  Push the changes to your GitHub repository, and Vercel will
     automatically build and deploy the website.
