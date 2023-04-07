@@ -19,13 +19,13 @@ Vercel.
 
 <!-- -->
 
-    bashCopy codegit clone https://github.com/Becklin/TWattractions.git
+    git clone https://github.com/Becklin/TWattractions.git
 
 2.  Install dependencies for the frontend:
 
 <!-- -->
 
-    bashCopy codecd taiwan-attractions
+    cd taiwan-attractions
     npm install
 
 3.  Configure the environment variables in `.env.local` to point to your
@@ -39,7 +39,7 @@ Vercel.
 
 <!-- -->
 
-    bashCopy codenpm run dev
+    npm run dev
 
 5.  Open your browser and go to `http://localhost:3000` to see the
     website.
