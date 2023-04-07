@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 import Geocode from "react-geocode";
-import { NEXT_GOOGLE_MAP_API_KEY } from "@/config/index";
-import adll from "@/config/index";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { MAP_API_KEY } from "@/config/index";
 
 const Marker = ({ text }) => (
   <div className="marker">
@@ -31,19 +32,18 @@ export default function SimpleMap({ address }) {
         setLoading(false);
       },
       (error) => {
-        console.error(error);
+        // console.error(error);
+        toast.error(error);
       }
     );
   }, []);
 
-  Geocode.setApiKey(NEXT_GOOGLE_MAP_API_KEY);
-  console.log({ NEXT_GOOGLE_MAP_API_KEY });
-  console.log({ adll });
+  Geocode.setApiKey(MAP_API_KEY);
 
   return (
     <div className="w-full h-[350px]">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: NEXT_GOOGLE_MAP_API_KEY }}
+        bootstrapURLKeys={{ key: MAP_API_KEY }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         yesIWantToUseGoogleMapApiInternals
