@@ -33,7 +33,7 @@ Vercel.
 
 <!-- -->
 
-    arduinoCopy codeNEXT_PUBLIC_API_URL=http://your-api-endpoint.com
+    NEXT_PUBLIC_API_URL=http://your-api-endpoint.com
 
 4.  Start the frontend server:
 
@@ -56,7 +56,7 @@ To deploy the website on Vercel, follow these steps:
 
 <!-- -->
 
-    makefileCopy codeNEXT_PUBLIC_API_URL=http://your-api-endpoint.com
+    NEXT_PUBLIC_API_URL=http://your-api-endpoint.com
     ADMIN_USERNAME=admin
     ADMIN_PASSWORD=your-admin-password
 
