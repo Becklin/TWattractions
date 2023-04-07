@@ -63,7 +63,7 @@ export default function EditAttractions({
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
-  const uploadImage = async (e) => {
+  const uploadImage = async () => {
     const res = await fetch(`${API_URL}/attractions/${id}?populate=*`);
     const {
       data: {
@@ -144,7 +144,12 @@ export default function EditAttractions({
         <div className="z-10 relative">
           {imagePreview ? (
             <div className="my-4 overflow-hidden rounded-4">
-              <Image src={imagePreview} width="200" height="170" />
+              <Image
+                alt="image preview"
+                src={imagePreview}
+                width="200"
+                height="170"
+              />
             </div>
           ) : (
             <div className="my-4 normal-case">No Image Uploaded</div>

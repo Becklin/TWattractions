@@ -23,7 +23,7 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
     image,
     slug,
   } = attributes;
-  const deleteAttraction = async (e) => {
+  const deleteAttraction = async () => {
     if (confirm("Are you sure?")) {
       const res = await fetch(`${API_URL}/attractions/${id}`, {
         method: "DELETE",
@@ -92,6 +92,7 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
                     ? image.data.attributes.formats.medium.url
                     : "/images/default_image.svg"
                 }
+                alt={name}
                 width={760}
                 height={400}
               />

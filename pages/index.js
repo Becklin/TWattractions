@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import ListLayout from "@/components/ListLayout";
 import AttractionItem from "@/components/AttractionItem";
-import { API_URL, NEXT_URL, PER_PAGE } from "@/config/index";
+import { API_URL, PER_PAGE } from "@/config/index";
 import Link from "next/link";
 
 export default function HomePage({ attractions }) {

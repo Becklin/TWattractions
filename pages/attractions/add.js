@@ -38,7 +38,6 @@ export default function AddAttractions({ token }) {
     const res = await fetch(`${API_URL}/attractions/`, {
       method: "POST",
       headers: {
-        // "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: formData,
@@ -140,7 +139,12 @@ export default function AddAttractions({ token }) {
             />
             {imagePreview ? (
               <div className="my-4 overflow-hidden rounded-4">
-                <Image src={imagePreview} width="200" height="170" />
+                <Image
+                  alt="image preview"
+                  src={imagePreview}
+                  width="200"
+                  height="170"
+                />
               </div>
             ) : (
               <div className="my-4 normal-case">No Image Uploaded</div>

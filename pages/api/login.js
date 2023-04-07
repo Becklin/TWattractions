@@ -1,7 +1,7 @@
 import { API_URL } from "@/config/index";
 import cookie from "cookie";
 
-export default async (req, res) => {
+export default async function Login(req, res) {
   if (req.method === "POST") {
     const { identifier, password } = req.body;
     try {
@@ -40,4 +40,4 @@ export default async (req, res) => {
       message: `Method ${req.method} not allowed`,
     });
   }
-};
+}

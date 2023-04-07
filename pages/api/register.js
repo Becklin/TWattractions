@@ -2,7 +2,7 @@
 import { API_URL } from "@/config/index";
 import cookie from "cookie";
 
-export default async (req, res) => {
+export default async function Register(req, res) {
   if (req.method === "POST") {
     const { username, email, password } = req.body;
     const StrapiRes = await fetch(`${API_URL}/auth/local/register`, {
@@ -43,4 +43,4 @@ export default async (req, res) => {
       message: `Method ${req.method} not allowed`,
     });
   }
-};
+}

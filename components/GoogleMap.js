@@ -6,7 +6,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MAP_API_KEY } from "@/config/index";
 
-const Marker = () => <Image src="/images/pin.svg" width={30} height={30} />;
+const Marker = () => (
+  <Image alt="map marker" src="/images/pin.svg" width={30} height={30} />
+);
 
 export default function SimpleMap({ address }) {
   const [lat, setLat] = useState(null);
@@ -34,7 +36,7 @@ export default function SimpleMap({ address }) {
         toast.error(error);
       }
     );
-  }, []);
+  }, [address]);
 
   Geocode.setApiKey(MAP_API_KEY);
   if (loading) return false;
