@@ -27,7 +27,6 @@ export default function SimpleMap({ address }) {
     Geocode.fromAddress(address).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
-        console.log(lat, lng);
         setLat(lat);
         setLng(lng);
         setLoading(false);
@@ -41,7 +40,7 @@ export default function SimpleMap({ address }) {
   Geocode.setApiKey(MAP_API_KEY);
   if (loading) return false;
   return (
-    <div className="w-full h-[350px]">
+    <div className="w-[200px] h-[150px]">
       <GoogleMapReact
         bootstrapURLKeys={{ key: MAP_API_KEY }}
         defaultCenter={defaultProps.center}

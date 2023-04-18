@@ -5,7 +5,7 @@ export default function DashboardAttraction({ attributes, id, handleDelete }) {
   const { name, image, introduction, slug } = attributes;
   return (
     <div>
-      <div className="card lg:card-side lg:h-28 bg-white shadow-lg my-4">
+      <div className="card lg:card-side md:h-28 bg-white shadow-lg my-4">
         <figure className="block w-40 relative shrink-0">
           <Image
             alt={name}
@@ -22,7 +22,7 @@ export default function DashboardAttraction({ attributes, id, handleDelete }) {
             {name}{" "}
             <div className="btn-group">
               <button
-                className="btn btn-active btn-xs normal-case"
+                className="btn btn-xs normal-case"
                 aria-label="edit attraction"
               >
                 <Link href={`/attractions/edit/${id}`}>
@@ -38,14 +38,16 @@ export default function DashboardAttraction({ attributes, id, handleDelete }) {
                 </a>
               </button>
               <Link
-                className="btn btn-xs btn-primary normal-case"
+                className="btn btn-xs normal-case"
                 href={`/attractions/${slug}`}
               >
                 Details
               </Link>
             </div>
           </h4>
-          <p className="overflow-hidden">{introduction}</p>
+          <p className="h-[70px] overflow-hidden text-neutral">
+            {introduction}
+          </p>
         </div>
       </div>
     </div>

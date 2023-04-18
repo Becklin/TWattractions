@@ -8,7 +8,7 @@ export default function ListLayout({ children }) {
         <Image
           priority
           alt="background image"
-          src="/images/sky.jpeg"
+          src="/images/ellena.jpg"
           fill
           className="z-0 object-cover"
         />

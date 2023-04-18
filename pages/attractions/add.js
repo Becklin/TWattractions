@@ -93,6 +93,7 @@ export default function AddAttractions({ token }) {
                 value={values.name}
                 placeholder="Name"
                 handleInputChange={handleInputChange}
+                required
               />
             </div>
             <div className="flex-1">
@@ -113,6 +114,7 @@ export default function AddAttractions({ token }) {
                 value={values.address}
                 placeholder="Address"
                 handleInputChange={handleInputChange}
+                required
               />
             </div>
           </div>
@@ -126,6 +128,7 @@ export default function AddAttractions({ token }) {
             onChange={handleInputChange}
             className="textarea textarea-bordered"
             placeholder="introduction"
+            required
           ></textarea>
           <div className="form-control w-full max-w-xs">
             <label className="label">

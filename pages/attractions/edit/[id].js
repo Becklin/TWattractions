@@ -110,6 +110,7 @@ export default function EditAttractions({
                 value={values.name}
                 placeholder="Name"
                 handleInputChange={handleInputChange}
+                required
               />
             </div>
           </div>
@@ -134,6 +135,7 @@ export default function EditAttractions({
             onChange={handleInputChange}
             className="textarea textarea-bordered"
             placeholder="introduction"
+            required
           ></textarea>
           <input
             type="submit"

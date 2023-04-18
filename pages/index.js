@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function HomePage({ attractions }) {
   return (
     <>
-      {!attractions && <h3>No Attraction to show</h3>}
+      {attractions.length == 0 && <h3>No Attraction to show</h3>}
       {attractions.map((attraction) => {
         const newAttr = {
           ...attraction.attributes,

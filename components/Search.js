@@ -30,7 +30,7 @@ export default function Search() {
         />
         <button
           onClick={handleSubmit}
-          className="btn btn-square btn-info"
+          className="btn btn-square btn-accent"
           aria-label="search attraction"
         >
           <svg

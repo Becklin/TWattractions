@@ -1,7 +1,7 @@
 import { FaUser } from "react-icons/fa";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Layout from "@/components/Layout";
@@ -12,7 +12,11 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login } = useContext(AuthContext);
+  const { login, error } = useContext(AuthContext);
+
+  useEffect(() => {
+    error && toast.error(error);
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,12 +38,13 @@ export default function LoginPage() {
           className="z-10 relative form-control w-full max-w-lg"
           onSubmit={handleSubmit}
         >
-          <h1>
+          <h1 className="text-neutral">
             <FaUser className="inline" /> Login
           </h1>
           <div className="flex justify-between gap-4">
             <div className="flex-1">
               <TwInput
+                autocomplete="email"
                 type="email"
                 name="email"
                 value={email}
@@ -51,6 +56,7 @@ export default function LoginPage() {
           <div className="flex justify-between gap-4">
             <div className="flex-1">
               <TwInput
+                autocomplete="current-password"
                 type="password"
                 name="password"
                 value={password}
@@ -62,7 +68,10 @@ export default function LoginPage() {
           <input type="submit" className="btn mt-8" value="Login" />
         </form>
         <p className="z-10 relative my-4">
-          Do not have an account? <Link href="/account/register">Register</Link>
+          Do not have an account?{" "}
+          <Link href="/account/register" className="text-neutral">
+            Register
+          </Link>
         </p>
         <Link href="/attractions">Back</Link>
         <div className="divider"></div>

@@ -9,7 +9,7 @@ import AuthContext from "@/context/AuthContext";
 export default function Header() {
   const { logout, user } = useContext(AuthContext);
   return (
-    <div className="z-10 fixed top-0 navbar bg-slate-800">
+    <div className="flex flex-col sm:flex-row z-10 fixed top-0 navbar bg-slate-800">
       <div className="flex-1">
         <Link
           className="btn btn-ghost text-xl text-slate-100 uppercase tracking-widest"

@@ -6,8 +6,6 @@ import { API_URL, NEXT_URL } from "@/config/index";
 import Layout from "@/components/Layout";
 import Link from "next/link";
 import qs from "qs";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { NextSeo, ArticleJsonLd } from "next-seo";
 import GoogleMap from "@/components/GoogleMap";
 
@@ -74,17 +72,12 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
         authorName={author}
         description={introduction}
       />
-      <div className="fixed w-full h-screen bg-[#e6e6e6] overflow-auto">
-        <div className="artboard-demo phone-6 mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto box-content p-4">
+      <div className="fixed w-full h-screen overflow-auto">
+        <div className="phone-6 mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto box-content text-neutral">
           <ToastContainer />
-          <h2 className="w-full flex items-baseline justify-between">
-            {name}
-            <span className="text-sm text-slate-300">
-              {new Date(createdAt).toLocaleDateString("en-ca")}
-            </span>
-          </h2>
-          <section className="flex gap-6 mb-6 w-full">
-            <section className="flex-1">
+          <h2 className="w-full">{name}</h2>
+          <div className="flex flex-col md:flex-row gap-5  w-full">
+            <section className="flex-3 gap-6">
               <Image
                 priority
                 src={
@@ -93,12 +86,12 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
                     : "/images/default_image.svg"
                 }
                 alt={name}
-                width={760}
-                height={400}
+                width={780}
+                height={300}
               />
               <div className="btn-group mt-4">
                 <button
-                  className="btn btn-active btn-xs normal-case"
+                  className="btn btn-xs normal-case"
                   aria-label="edit attraction"
                 >
                   <Link href={`/attractions/edit/${id}`}>Edit Attraction</Link>
@@ -115,21 +108,17 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
                   <Link href="/attractions">Back</Link>
                 </button>
               </div>
-              <div className="my-4">
-                <FontAwesomeIcon icon={faLocationDot} size="lg" />
-                <span className="ml-2">
-                  {address} at {location}
-                </span>
+              <p className="my-4">{introduction}</p>
+            </section>
+            <section className="flex flex-col gap-4 text-sm w-[180px] shrink-0">
+              <div>{new Date(createdAt).toLocaleDateString("en-ca")}</div>
+              <div>
+                {address} at {location}
               </div>
               <GoogleMap address={address} />
-              <div className="my-2 text-sm text-slate-500">
-                Posted by {author}
-              </div>
+              <div>Posted by {author}</div>
             </section>
-            <section className="flex-1">
-              <p>{introduction}</p>
-            </section>
-          </section>
+          </div>
           <section className="flex w-full justify-between items-center"></section>
         </div>
       </div>

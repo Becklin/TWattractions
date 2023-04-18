@@ -5,8 +5,9 @@
 .card-body {
   padding: var(--padding-card, 1rem);
 }
-html {
-  background: #f5f5f4;
+
+:root {
+  background-color: #ffffff;
 }
 h1 {
   font-size: 2rem;
@@ -30,4 +31,13 @@ h4 {
 }
 h5 {
   font-size: 1.2rem;
+}
+
+.btn,
+.card {
+  @apply rounded-none;
+}
+
+.input {
+  @apply rounded-none;
 }

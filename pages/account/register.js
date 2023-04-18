@@ -42,11 +42,12 @@ export default function RegisterPage() {
             className="z-[1] relative form-control w-full max-w-lg"
             onSubmit={handleSubmit}
           >
-            <h1>Register</h1>
+            <h1 className="text-neutral">Register</h1>
             <div className="flex justify-between gap-4">
               <div className="flex-1">
                 <TwInput
                   type="text"
+                  autocomplete="name"
                   name="username"
                   value={username}
                   placeholder="username"
@@ -56,6 +57,7 @@ export default function RegisterPage() {
               <div className="flex-1">
                 <TwInput
                   type="email"
+                  autocomplete="email"
                   name="email"
                   value={email}
                   placeholder="email"
@@ -66,6 +68,7 @@ export default function RegisterPage() {
             <div className="flex justify-between gap-4">
               <div className="flex-1">
                 <TwInput
+                  autocomplete="new-password"
                   type="password"
                   name="password"
                   value={password}
