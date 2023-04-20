@@ -129,7 +129,7 @@ export default function AddAttractions({ token }) {
             className="textarea textarea-bordered"
             placeholder="introduction"
             required
-          ></textarea>
+          />
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="label-text">Pick an image</span>

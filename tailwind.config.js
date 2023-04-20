@@ -9,6 +9,7 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   daisyui: {
+    // prefix: "daisy",
     themes: [
       {
         mytheme: {

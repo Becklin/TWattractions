@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { parseCookies } from "@/helpers/index";
-import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { parseCookies } from "@/helpers/index";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "@/components/Layout";
 import TwInput from "@/components/TwInput";
-import Modal from "@/components/Modal";
-import ImageUpload from "@/components/ImageUpload";
 import { API_URL } from "@/config/index";
+const Modal = dynamic(() => import("@/components/Modal"));
+const ImageUpload = dynamic(() => import("@/components/ImageUpload"));
 
 export default function EditAttractions({
   attraction: { id, attributes },
@@ -73,7 +74,7 @@ export default function EditAttractions({
     setImagePreview(image.data.attributes.formats.thumbnail.url);
     setShowModal(false);
   };
-
+  console.log({ Modal });
   return (
     <Layout title="Update New Attraction">
       <div className="mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto">
@@ -136,7 +137,7 @@ export default function EditAttractions({
             className="textarea textarea-bordered"
             placeholder="introduction"
             required
-          ></textarea>
+          />
           <input
             type="submit"
             className="btn mt-8 normal-case"
@@ -163,9 +164,15 @@ export default function EditAttractions({
           >
             Set Image
           </button>
-          <Modal show={showModal} onClose={() => setShowModal(false)}>
-            <ImageUpload atrId={id} imageUploaded={uploadImage} token={token} />
-          </Modal>
+          {showModal && (
+            <Modal show={showModal} onClose={() => setShowModal(false)}>
+              <ImageUpload
+                atrId={id}
+                imageUploaded={uploadImage}
+                token={token}
+              />
+            </Modal>
+          )}
         </div>
       </div>
     </Layout>

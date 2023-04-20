@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+// To avoid naming conflcit with daisyUi, create a separate css
+import styles from "@/styles/Modal.module.scss";
 
 export default function Modal({ show, children, title }) {
   const [isBrowser, setIsBrowser] = useState(false);
@@ -9,10 +11,10 @@ export default function Modal({ show, children, title }) {
 
   const modalContent = show ? (
     <>
-      <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
-          {title && <h3 className="font-bold text-lg">{title}</h3>}
-          {children}
+      <div className={styles.overlay}>
+        <div className={styles.modal}>
+          {title && <div>{title}</div>}
+          <div className={styles.body}>{children}</div>
         </div>
       </div>
     </>
