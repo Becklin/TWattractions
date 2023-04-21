@@ -1,10 +1,8 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
   return (
-    // <footer className="fixed bottom-0 text-white w-full mx-4">
     <footer className="fixed bottom-0 p-2 w-full h-[40px] bg-neutral text-neutral-content flex items-center gap-2">
       <Link
         href="https://beckyenwen.com"
@@ -21,7 +19,7 @@ export default function Footer() {
         rel="noopener noreferrer"
         aria-label="LinkedIn"
       >
-        <FontAwesomeIcon icon={faLinkedin} />
+        <FontAwesomeIcon icon={["fab", "linkedin"]} />
       </Link>
     </footer>
   );

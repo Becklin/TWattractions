@@ -69,7 +69,11 @@ export default function LoginPage() {
         </form>
         <p className="z-10 relative my-4">
           Do not have an account?{" "}
-          <Link href="/account/register" className="text-neutral">
+          <Link
+            href="/account/register"
+            className="text-neutral"
+            prefetch={true}
+          >
             Register
           </Link>
         </p>

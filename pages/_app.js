@@ -2,9 +2,14 @@ import "normalize.css/normalize.css";
 import "../styles/globals.scss";
 import { AuthProvider } from "@/context/AuthContext";
 import { Montserrat } from "next/font/google";
+// reference: https://github.com/FortAwesome/Font-Awesome/issues/19348
+const { library, config } = require("@fortawesome/fontawesome-svg-core");
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
 import { DefaultSeo } from "next-seo";
 
+library.add(faLinkedin);
 const newMontserrat = Montserrat({ subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }) {
