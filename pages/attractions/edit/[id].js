@@ -74,7 +74,6 @@ export default function EditAttractions({
     setImagePreview(image.data.attributes.formats.thumbnail.url);
     setShowModal(false);
   };
-  console.log({ Modal });
   return (
     <Layout title="Update New Attraction">
       <div className="mt-24 mx-3 mb-12 md:w-[780px] md:mx-auto">

@@ -84,7 +84,7 @@ export default function AddAttractions({ token }) {
           className="z-[1] relative form-control w-full max-w-lg"
           onSubmit={handleSubmit}
         >
-          <h2>Add Attractions</h2>
+          <h2 className="text-neutral">Add Attractions</h2>
           <div className="flex justify-between gap-4">
             <div className="flex-1">
               <TwInput
@@ -119,7 +119,7 @@ export default function AddAttractions({ token }) {
             </div>
           </div>
           <label className="label" htmlFor="introduction">
-            <span className="label-text text-white">Introduction</span>
+            <span className="label-text  text-neutral">Introduction</span>
           </label>
           <textarea
             id="introduction"
@@ -132,7 +132,7 @@ export default function AddAttractions({ token }) {
           />
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="label-text">Pick an image</span>
+              <span className="label-text text-neutral">Pick an image</span>
             </label>
             <input
               type="file"
@@ -150,7 +150,9 @@ export default function AddAttractions({ token }) {
                 />
               </div>
             ) : (
-              <div className="my-4 normal-case">No Image Uploaded</div>
+              <div className="my-4 normal-case text-neutral">
+                No Image Uploaded
+              </div>
             )}
           </div>
           <input type="submit" className="btn mt-8" value="Add Attraction" />

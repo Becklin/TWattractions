@@ -32,8 +32,7 @@ export default function DashboardPage({ attractions = [], token }) {
     <>
       <div>
         <ToastContainer />
-        <h1 className="text-neutral-content">Dashboard</h1>
-        <h3 className="text-neutral-content">My Posts</h3>
+        <h2 className="text-neutral-content">My Posts</h2>
         {attractions.map(({ id, attributes }) => (
           <DashboardAttraction
             key={id}
