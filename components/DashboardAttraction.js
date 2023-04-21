@@ -5,7 +5,7 @@ export default function DashboardAttraction({ attributes, id, handleDelete }) {
   const { name, image, introduction, slug } = attributes;
   return (
     <div>
-      <div className="card lg:card-side md:h-28 bg-white shadow-lg my-4">
+      <div className="card h-24 lg:card-side bg-white shadow-lg my-4">
         <figure className="block w-40 relative shrink-0">
           <Image
             alt={name}

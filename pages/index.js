@@ -17,12 +17,7 @@ export default function HomePage({ attractions }) {
       })}
       {attractions.length > 0 && (
         <div>
-          {/* Any <Link /> in the viewport (initially or through scroll) will be prefetched 
-          by default (including the corresponding data) for pages using Static Generation. 
-          The corresponding data for server-rendered routes is fetched only 
-          when the <Link /> is clicked. */}
-          {/* client-side route transitions */}
-          <Link className="btn normal-case" href="attractions">
+          <Link className="text-neutral" href="attractions">
             View All Attractions
           </Link>
         </div>

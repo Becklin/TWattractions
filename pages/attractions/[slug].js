@@ -110,7 +110,7 @@ export default function AttractionPage({ attraction: { id, attributes } }) {
               </div>
               <p className="my-4">{introduction}</p>
             </section>
-            <section className="flex flex-col gap-4 text-sm w-[180px] shrink-0">
+            <section className="flex flex-col gap-2 text-sm w-[180px] shrink-0">
               <div>{new Date(createdAt).toLocaleDateString("en-ca")}</div>
               <div>
                 {address} at {location}

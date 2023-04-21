@@ -1,5 +1,6 @@
 import "normalize.css/normalize.css";
 import "../styles/globals.scss";
+import Head from "next/head";
 import { AuthProvider } from "@/context/AuthContext";
 import { Montserrat } from "next/font/google";
 // reference: https://github.com/FortAwesome/Font-Awesome/issues/19348
@@ -32,7 +33,17 @@ function MyApp({ Component, pageProps }) {
             font-family: ${newMontserrat.style.fontFamily};
           }
         `}</style>
-        {getLayout(<Component {...pageProps} />)}
+        {getLayout(
+          <>
+            <Head>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              ></meta>
+            </Head>
+            <Component {...pageProps} />
+          </>
+        )}
       </AuthProvider>
     </>
   );

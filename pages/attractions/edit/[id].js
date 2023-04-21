@@ -85,9 +85,7 @@ export default function EditAttractions({
           fill
           className="z-0 object-cover"
         />
-        <Link className={""} href="/attractions">
-          Back
-        </Link>
+        <Link href="/attractions">Back</Link>
         <form
           className="z-10 relative form-control w-full max-w-lg"
           onSubmit={handleSubmit}

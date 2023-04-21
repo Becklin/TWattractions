@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function AttractionItem({ attraction }) {
   return (
     <div>
-      <div className="card md:card-side md:h-28 bg-white shadow-lg my-4 rounded">
+      <div className="card h-24 md:card-side bg-white shadow-lg my-4 rounded">
         <figure className="block w-40 relative shrink-0">
           <Image
             alt={attraction.name}
